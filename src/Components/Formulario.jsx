@@ -7,7 +7,7 @@ class Formulario extends Component{
         super();
 
         this.state = {
-            lista:null,
+            lista:[],
             nombre_apellido:"",
             sexo:"",
             sede:"",
@@ -213,6 +213,7 @@ class Formulario extends Component{
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" id="basic-addon1">Escuela</span>
                                 </div>
+
                                 < FormControl
                                     id="Escuela"
                                     type = " text "
@@ -237,7 +238,7 @@ class Formulario extends Component{
                     </Form>
                 </div>
                 <div className="container">
-                    <Button
+                    <Button  id="basic-addon1"
                         type="submit"
                         onClick={this.handleSearchClick}
                     >Buscar</Button>

@@ -12,4 +12,10 @@
 }
 .container{
   margin:0 auto;
+  
+}
+
+#basic-addon1{
+  background-color: #276CAA;
+  color: white;
 }
