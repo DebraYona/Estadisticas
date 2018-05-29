@@ -5,7 +5,11 @@
 
 .formulario{
   padding: 40px;
+
 }
 #formEstadistica{
   padding : 10px;
+}
+.container{
+  margin:0 auto;
 }
