@@ -206,7 +206,7 @@ class Formulario extends Component{
                 <div className="container">
                     <Button  id="basic-addon1"
                         type="submit"
-                        onClick={this.handleSearchClick}
+                      //  onClick={this.handleSearchClick}
                     >Buscar</Button>
                 </div>
             </div>
