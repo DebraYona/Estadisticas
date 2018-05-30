@@ -10,11 +10,11 @@ class Tablas extends Component{
     const columns=[
       {
           Header: "Codigo ",
-          accessor: "first_name"
+          accessor: "codigo"
       },
       {
           Header: "Nombre",
-          accessor: "last_name",
+          accessor: "nombre",
           foldable: true,
       },
       {
@@ -59,7 +59,28 @@ class Tablas extends Component{
           foldable: true,
       }]
       const data = [{
-
+        codigo:'15200204',
+        nombre:'debra',
+        apepater:'chacaliaza',
+        apemater:'Llamosa',
+        sede: 'Lima',
+        facultad:'Fis',
+        escuela:'sis',
+        correo: 'de.chacaliaza@gmail.com',
+        telefono: '789523192',
+        direccion: 'por aqui y por alli'
+      },
+      {
+        codigo:'15200300',
+        nombre:'lucas',
+        apepater:'Llano',
+        apemater:'Esta',
+        sede: 'Lima',
+        facultad:'Fis',
+        escuela:'sis',
+        correo: 'lu.llano@gmail.com',
+        telefono: '789523192',
+        direccion: 'por aqui y por alli'
       }]
 
     return(
@@ -106,7 +127,7 @@ class Tablas extends Component{
 
 
 
-        <ReactTable   columns={columns}>
+        <ReactTable   columns={columns} data ={data}>
 
 
 

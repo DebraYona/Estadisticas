@@ -8,13 +8,13 @@ class Formulario extends Component{
 
         this.state = {
             lista:[],
-            nombre_apellido:"",
-            sexo:"",
+            nombre:"",
             sede:"",
             facultad:"",
-            dates:"",
-            dates2:"",
             escuela:"",
+            sexo:"",
+            desde:"",
+            hasta:"",
             estado: false,
             operacion:'',
             isLoading:false
