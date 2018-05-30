@@ -19,65 +19,17 @@ class Formulario extends Component{
             operacion:'',
             isLoading:false
         };
-        this.handleChangeDate = this.handleChangeDate.bind(this);
-        this.handleChangeDate2 = this.handleChangeDate2.bind(this);
-        this.handleSearchClick=this.handleSearchClick.bind(this);
-        this.handleInputName=this.handleInputName.bind(this);
-        this.handleInputSexo=this.handleInputSexo.bind(this);
-        this.handleInputSede=this.handleInputSede.bind(this);
-        this.handleInputFacultad=this.handleInputFacultad.bind(this);
-        this.handleInputEscuela=this.handleInputEscuela.bind(this);
+
+        this.handleInput = this.handleInput.bind(this)
+
+
+
+
+
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
     }
-    // leer del input Concepto
-    handleInputName(data){
-        this.setState({
-            nombre_apellido:data.target.value,
-            mensaje:""
-        });
-    }
-    handleInputSexo(data){
-        this.setState({
-            sexo:data.target.value,
-            mensaje:""
-        });
-    }
-    handleInputSede(data){
-        this.setState({
-            sede:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleInputFacultad(data){
-        this.setState({
-            facultad:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleInputEscuela(data){
-        this.setState({
-            escuela:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleChangeDate(date){
-        this.setState({
-            dates: date.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleChangeDate2(date){
-        this.setState({
-            dates2: date.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
+
     handleSearchClick(){
         //let url = '';
         if(this.state.nombre_apellido === "" && this.state.sexo === ""&& this.state.sede === "" &&
@@ -144,36 +96,51 @@ class Formulario extends Component{
             }
         }
         return contenedor;
+
+      }
+
+    handleInput(e) {
+      const {value, name} = e.target
+      this.setState({
+        [name]:value
+
+      })
+      console.log(this.state);
+
+
     }
+
+
+
   render(){
     return(
         <div className="container">
             <div className="formulario" >
                 <div className="container ">
                     <Form inline>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
+                        <div className="input-group mb-3 ">
+                            <div className="input-group-prepend ">
                                 <span className="input-group-text" id="basic-addon1">Nombre o Apellido</span>
                             </div>
                             <FormControl
-                                id="Nombre"
                                 type="text"
-                                value={this.state.nombre_apellido}
-                                onChange={this.handleInputName}
+                                name="nombre"
+                                onChange={this.handleInput}
                                 placeholder="Nombre o Apellido"
                             />
                         </div>
+
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
-                                <span className="input-group-text" id="basic-addon1">Sexo</span>
+                                <span className="input-group-text" id="basic-addon1" >Sexo</span>
                             </div>
                             <FormGroup controlId="formControlsSelect">
                                 <FormControl
                                     type="select"
+                                    name="sexo"
                                     componentClass="select"
-                                    value={this.state.sexo}
-                                    onChange={this.handleInputSexo}
                                     placeholder="Sexo"
+                                    onChange={this.handleInput}
                                 >
                                     <option value="">Sexo</option>
                                     <option value="femenino"> Femenino </option>
@@ -190,10 +157,10 @@ class Formulario extends Component{
                                     <span className="input-group-text" id="basic-addon1">Sede</span>
                                 </div>
                                 < FormControl
-                                    id="Sede"
+                                    name="sede"
                                     type = " text "
-                                    value={this.state.sede}
-                                    onChange={this.handleInputSede}
+
+                                    onChange={this.handleInput}
                                     placeholder = " Sede "
                                 />
                             </div>
@@ -202,10 +169,10 @@ class Formulario extends Component{
                                     <span className="input-group-text" id="basic-addon1">Facultad</span>
                                 </div>
                                 < FormControl
-                                    id="Facultad"
+                                    name="facultad"
                                     type = " text "
-                                    value={this.state.facultad}
-                                    onChange={this.handleInputFacultad}
+
+                                    onChange={this.handleInput}
                                     placeholder = " Facultad "
                                 />
                             </div>
@@ -215,27 +182,26 @@ class Formulario extends Component{
                                 </div>
 
                                 < FormControl
-                                    id="Escuela"
+                                    name="escuela"
                                     type = " text "
-                                    value={this.state.escuela}
-                                    onChange={this.handleInputEscuela}
+                                    onChange={this.handleInput}
                                     placeholder = " Escuela "
                                 />
                             </div>
                     </Form>
                 </div>
-                <div className="container">
-                    <Form inline>
+                  <div className="container">
+                    <form inline>
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="basic-addon1">Periodo</span>
                             </div>
                             <FormGroup inline >
-                                <input type="date" className="form-control"  onChange={this.handleChangeDate}/>
-                                <input type="date" className="form-control"  onChange={this.handleChangeDate2}/>
+                                <input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/>
+                                <input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/>
                             </FormGroup>
                         </div>
-                    </Form>
+                    </form>
                 </div>
                 <div className="container">
                     <Button  id="basic-addon1"
