@@ -8,7 +8,7 @@ class Formulario extends Component{
 
         this.state = {
             lista:[],
-            nombre:"",
+            nombre:["debra", "juan", "lucas","julio"],
             sede:"",
             facultad:"",
             escuela:"",
@@ -21,6 +21,7 @@ class Formulario extends Component{
         };
 
         this.handleInput = this.handleInput.bind(this)
+        //this.filtrar = this.filtrar.bind(this)
 
 
 
@@ -106,7 +107,18 @@ class Formulario extends Component{
 
       })
       console.log(this.state);
+      console.log(e.target.name);
+    }
 
+    filtrar(e){
+      var value = e.target.value
+      var lista = this.state.name;
+    lista=  lista.filter( function(value){
+        return value
+        //.tolowerCase().search(  value.tolowerCase()) !== -1;
+      })
+      console.log(e.target.value);
+      console.log(lista);
 
     }
 
