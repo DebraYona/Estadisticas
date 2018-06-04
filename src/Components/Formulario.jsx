@@ -9,6 +9,7 @@ class Formulario extends Component{
         this.state = {
             lista:[],
             nombre:["debra", "juan", "lucas","julio"],
+
             sede:"",
             facultad:"",
             escuela:"",
@@ -17,11 +18,113 @@ class Formulario extends Component{
             hasta:"",
             estado: false,
             operacion:'',
-            isLoading:false
+            isLoading:false,
+            sede2:[
+              {
+                "id_sede":1,
+                "nombre_sede": "callao",
+                "facultad":["1","2"],
+                "escuela":[
+
+                ]
+              },
+
+              {
+                "id_sede":2,
+                "nombre_sede": "caniete",
+                "facultad":[
+                    {
+                      "id_facultad":1
+                    },
+                    {
+                      "id_facultad":3
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":1
+                  },
+                  {
+                    "id_escuela":2
+                  },
+                  {
+                    "id_escuela":3
+                  },
+                  {
+                    "id_escuela":4
+                  }
+                ]
+              }
+
+            ],
+
+            "facultad":[
+              {
+                "id_facultad":1,
+                "nombre_facultad": "FIS",
+                "sede":[
+                    {
+                      "id_sede":1
+                    },
+                    {
+                      "id_sede":2
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":1
+                  },
+                  {
+                    "id_escuela":2
+                  }
+                ]
+              },
+              {
+                "id_facultad":2,
+                "nombre_facultad": "FIARN",
+                "sede":[
+                    {
+                      "id_sede":1
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":3
+                  }
+                ]
+                },
+              {
+                "id_facultad":3,
+                "nombre_facultad": "FIME",
+                "sede":[
+                    {
+                      "id_sede":1
+                    },
+                    {
+                      "id_sede":2
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":4
+                  }
+                ]
+              }
+
+            ],
+
+            "filtro":[]
+
         };
 
         this.handleInput = this.handleInput.bind(this)
-        //this.filtrar = this.filtrar.bind(this)
+        this.filtrar = this.filtrar.bind(this)
+        this.filtrar2 = this.filtrar2.bind(this)
+
 
 
 
@@ -101,6 +204,7 @@ class Formulario extends Component{
       }
 
     handleInput(e) {
+
       const {value, name} = e.target
       this.setState({
         [name]:value
@@ -108,19 +212,45 @@ class Formulario extends Component{
       })
       console.log(this.state);
       console.log(e.target.name);
+
+
     }
+
 
     filtrar(e){
       var value = e.target.value
-      var lista = this.state.name;
-    lista=  lista.filter( function(value){
-        return value
-        //.tolowerCase().search(  value.tolowerCase()) !== -1;
-      })
-      console.log(e.target.value);
+      var lista = this.state.nombre
+      console.log(lista)
+      lista=  lista.filter(function(valueq){
+       return valueq.toLowerCase().search(
+        value.toLowerCase())  !== -1
+       //valueq.tolowerCase().search( value.tolowerCase()) !== -1;
+     })
+      this.setState
+
+        //.tolowerCase().search(  value.tolowerCase()) !== -1;}
+
+    //  console.log(e.target.value);
       console.log(lista);
 
     }
+
+
+
+    filtrar2(e){
+      var value = e.target.value
+      var lista = this.state.facultad
+      console.log(lista)
+      lista=  lista.filter(function(valueq){
+       return valueq.nombre_facultad.toLowerCase().search(
+        value) !== -1
+
+     })
+
+      console.log(lista);
+
+    }
+
 
 
 
@@ -137,7 +267,7 @@ class Formulario extends Component{
                             <FormControl
                                 type="text"
                                 name="nombre"
-                                onChange={this.handleInput}
+                                onChange={this.filtrar2}
                                 placeholder="Nombre o Apellido"
                             />
                         </div>
