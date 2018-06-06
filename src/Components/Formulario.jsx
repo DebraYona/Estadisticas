@@ -11,7 +11,12 @@ class Formulario extends Component{
         this.state = {
             selectedOption: [],
             data:[],
-            nombre:["debra", "juan", "lucas","julio"],
+            nombre:[
+              {"id_nombre":1, "nombre":"debra"},
+              {"id_nombre":2, "nombre":"juan"},
+              {"id_nombre":3, "nombre":"lucas"},
+              {"id_nombre":4, "nombre":"julio"},
+            ],
 
             sede:"",
             facultad:"",
@@ -255,6 +260,7 @@ class Formulario extends Component{
 
     }
     handleChange = (selectedOption) => {
+
     this.setState({ selectedOption });
     console.log(selectedOption);
 
@@ -266,7 +272,7 @@ class Formulario extends Component{
   render(){
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
-
+    const option=this.state.nombre
     return(
         <div className="container">
             <div className="formulario" >
@@ -276,12 +282,23 @@ class Formulario extends Component{
                             <div className="input-group-prepend ">
                                 <span className="input-group-text" id="basic-addon1">Nombre o Apellido</span>
                             </div>
-                            <FormControl
-                                type="text"
-                                name="nombre"
-                                onChange={this.filtrar2}
-                                placeholder="Nombre o Apellido"
-                            />
+
+                            <Select
+                                   name="nombre"
+                                    value={selectedOption}
+                                    multi
+                                    onChange={this.handleChange}
+                                    placeholder="Nombre"
+                                    removeSelected={true}
+                                    rtl={false}
+                                    simpleValue
+                                   options= {option}
+                                   valueKey='id_nombre'
+                                   labelKey='nombre'
+
+
+                                 />
+
                             <list filtro ></list>
                         </div>
 
