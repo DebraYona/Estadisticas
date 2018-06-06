@@ -4,6 +4,7 @@ import './index.css';
 import ReactTable from "react-table";
 import ReactStory from 'react-story'
 import 'react-table/react-table.css'
+import Formulario from "./Formulario"
 
 
 class Tablas extends Component{
@@ -98,7 +99,7 @@ class Tablas extends Component{
 
     return(
       <div>
-      
+
 
         <ReactTable  className="tabla" responsive columns={columns} data ={data}/>
 

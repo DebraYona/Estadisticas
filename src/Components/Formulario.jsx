@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import Tablas from './TablaDatos';
 import { Button, Form, FormGroup, FormControl} from 'react-bootstrap';
 import './index.css';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 class Formulario extends Component{
     constructor(){
         super();
 
         this.state = {
-            lista:[],
+            selectedOption: [],
+            data:[],
             nombre:["debra", "juan", "lucas","julio"],
 
             sede:"",
@@ -117,7 +120,7 @@ class Formulario extends Component{
 
             ],
 
-            "filtro":[]
+            filtro:[]
 
         };
 
@@ -125,14 +128,11 @@ class Formulario extends Component{
         this.filtrar = this.filtrar.bind(this)
         this.filtrar2 = this.filtrar2.bind(this)
 
-
-
-
-
-
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
+
     }
+
 
     handleSearchClick(){
         //let url = '';
@@ -226,12 +226,16 @@ class Formulario extends Component{
         value.toLowerCase())  !== -1
        //valueq.tolowerCase().search( value.tolowerCase()) !== -1;
      })
-      this.setState
+      this.setState({filtro: lista})
 
         //.tolowerCase().search(  value.tolowerCase()) !== -1;}
 
-    //  console.log(e.target.value);
-      console.log(lista);
+    // console.log(e.target.value);
+
+    }
+
+    handleSubmit(e){
+      e.preventDefault()
 
     }
 
@@ -243,11 +247,16 @@ class Formulario extends Component{
       console.log(lista)
       lista=  lista.filter(function(valueq){
        return valueq.nombre_facultad.toLowerCase().search(
-        value) !== -1
+        value.toLowerCase()) !== -1
 
      })
 
       console.log(lista);
+
+    }
+    handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    console.log(selectedOption);
 
     }
 
@@ -255,6 +264,9 @@ class Formulario extends Component{
 
 
   render(){
+    const { selectedOption } = this.state;
+  	const value = selectedOption && selectedOption.value;
+
     return(
         <div className="container">
             <div className="formulario" >
@@ -270,6 +282,7 @@ class Formulario extends Component{
                                 onChange={this.filtrar2}
                                 placeholder="Nombre o Apellido"
                             />
+                            <list filtro ></list>
                         </div>
 
                         <div className="input-group mb-3">
@@ -277,17 +290,20 @@ class Formulario extends Component{
                                 <span className="input-group-text" id="basic-addon1" >Sexo</span>
                             </div>
                             <FormGroup controlId="formControlsSelect">
-                                <FormControl
+                                <Select
+                                    multi={true}
                                     type="select"
                                     name="sexo"
                                     componentClass="select"
-                                    placeholder="Sexo"
-                                    onChange={this.handleInput}
-                                >
-                                    <option value="">Sexo</option>
-                                    <option value="femenino"> Femenino </option>
-                                    <option value="masculino"> Masculino </option>
-                                </FormControl>
+                                multi    placeholder="Sexo"
+                                    onChange={this.handleChange}
+                                    options={[
+                                      { value: 'femenino', label: 'Femenino' },
+                                      { value: 'masculino', label: 'Masculino' },
+
+                                    ]}
+                                  >
+                                </Select>
                             </FormGroup>
                         </div>
                     </Form>
@@ -342,6 +358,29 @@ class Formulario extends Component{
                                 <input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/>
                                 <input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/>
                             </FormGroup>
+                        </div>
+                        <div>
+                        <FormGroup>
+                        <Select
+                               name="form-field-name"
+                                value={selectedOption}
+                                multi
+                                onChange={this.handleChange}
+
+                                removeSelected={true}
+                                rtl={false}
+                                simpleValue
+                               options={[
+                                 { value: 'one', label: 'Onjohkho' },
+                                 { value: 'two', label: 'Two' },
+                                  { value: 'df', label: 'sd' },
+                                   { value: 'twsdfo', label: 'Tasdwo' },
+                                    { value: 'dfsf', label: 'rwea' },
+
+                               ]}
+                             />
+
+                        </FormGroup>
                         </div>
                     </form>
                 </div>
