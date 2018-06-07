@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Table} from 'react-bootstrap';
 import './index.css';
 import ReactTable from "react-table";
+import ReactStory from 'react-story'
 import 'react-table/react-table.css'
+import Formulario from "./Formulario"
 
 
 class Tablas extends Component{
@@ -10,11 +12,11 @@ class Tablas extends Component{
     const columns=[
       {
           Header: "Codigo ",
-          accessor: "first_name"
+          accessor: "codigo"
       },
       {
           Header: "Nombre",
-          accessor: "last_name",
+          accessor: "nombre",
           foldable: true,
       },
       {
@@ -59,58 +61,49 @@ class Tablas extends Component{
           foldable: true,
       }]
       const data = [{
-
+        codigo:'15200204',
+        nombre:'debra',
+        apepater:'chacaliaza',
+        apemater:'Llamosa',
+        sede: 'Lima',
+        facultad:'Fis',
+        escuela:'sis',
+        correo: 'de.chacaliaza@gmail.com',
+        telefono: '789523192',
+        direccion: 'por aqui y por alli'
+      },
+      {
+        codigo:'15200300',
+        nombre:'lucas',
+        apepater:'Llano',
+        apemater:'Esta',
+        sede: 'Lima',
+        facultad:'Fis',
+        escuela:'sis',
+        correo: 'lu.llano@gmail.com',
+        telefono: '789523192',
+        direccion: 'por aqui y por alli'
+      },
+      {
+        codigo:'15200300',
+        nombre:null,
+        apepater:'',
+        apemater:'Esta',
+        sede: 'Lima',
+        facultad:'Fis',
+        escuela:'sis',
+        correo: 'lu.llano@gmail.com',
+        telefono: '789523192',
+        direccion: 'por aqui y por alli'
       }]
 
     return(
       <div>
-        <Table className="tabla" responsive   striped bordered>
-          <thead>
-            <tr>
-              <th>Codigo </th>
-              <th>Nombre </th>
-              <th>Apellido </th>
-              <th>Facultad </th>
-              <th>Telefono </th>
-              <th>Direccion </th>
-
-            </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <td>1</td>
-                <td>Datos Prueba</td>
-                <td>Datos Prueba</td>
-                <td>Datos Prueba</td>
-                <td>Datos Prueba</td>
-                <td>Datos Prueba</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td> Prueba 2</td>
-                <td> Prueba 2</td>
-                <td> Prueba 2</td>
-                <td> Prueba 2</td>
-                <td> Prueba 2</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td> Prueba datos</td>
-                <td> Prueba datos</td>
-                <td> Prueba datos</td>
-                <td> Prueba datos</td>
-                <td> Prueba datos</td>
-                </tr>
-    </tbody>
-        </Table>
 
 
-
-        <ReactTable   columns={columns}>
-
+        <ReactTable  className="tabla" responsive columns={columns} data ={data}/>
 
 
-            </ReactTable>
       </div>
     )
   }

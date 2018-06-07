@@ -2,82 +2,143 @@ import React, { Component } from 'react';
 import Tablas from './TablaDatos';
 import { Button, Form, FormGroup, FormControl} from 'react-bootstrap';
 import './index.css';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 class Formulario extends Component{
     constructor(){
         super();
 
         this.state = {
-            lista:[],
-            nombre_apellido:"",
-            sexo:"",
+            selectedOption: [],
+            data:[],
+            nombre:[
+              {"id_nombre":1, "nombre":"debra"},
+              {"id_nombre":2, "nombre":"juan"},
+              {"id_nombre":3, "nombre":"lucas"},
+              {"id_nombre":4, "nombre":"julio"},
+            ],
+
             sede:"",
             facultad:"",
-            dates:"",
-            dates2:"",
             escuela:"",
+            sexo:"",
+            desde:"",
+            hasta:"",
             estado: false,
             operacion:'',
-            isLoading:false
+            isLoading:false,
+            sede2:[
+              {
+                "id_sede":1,
+                "nombre_sede": "callao",
+                "facultad":["1","2"],
+                "escuela":[
+
+                ]
+              },
+
+              {
+                "id_sede":2,
+                "nombre_sede": "caniete",
+                "facultad":[
+                    {
+                      "id_facultad":1
+                    },
+                    {
+                      "id_facultad":3
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":1
+                  },
+                  {
+                    "id_escuela":2
+                  },
+                  {
+                    "id_escuela":3
+                  },
+                  {
+                    "id_escuela":4
+                  }
+                ]
+              }
+
+            ],
+
+            "facultad":[
+              {
+                "id_facultad":1,
+                "nombre_facultad": "FIS",
+                "sede":[
+                    {
+                      "id_sede":1
+                    },
+                    {
+                      "id_sede":2
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":1
+                  },
+                  {
+                    "id_escuela":2
+                  }
+                ]
+              },
+              {
+                "id_facultad":2,
+                "nombre_facultad": "FIARN",
+                "sede":[
+                    {
+                      "id_sede":1
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":3
+                  }
+                ]
+                },
+              {
+                "id_facultad":3,
+                "nombre_facultad": "FIME",
+                "sede":[
+                    {
+                      "id_sede":1
+                    },
+                    {
+                      "id_sede":2
+                    }
+
+                ],
+                "escuela":[
+                  {
+                    "id_escuela":4
+                  }
+                ]
+              }
+
+            ],
+
+            filtro:[]
+
         };
-        this.handleChangeDate = this.handleChangeDate.bind(this);
-        this.handleChangeDate2 = this.handleChangeDate2.bind(this);
-        this.handleSearchClick=this.handleSearchClick.bind(this);
-        this.handleInputName=this.handleInputName.bind(this);
-        this.handleInputSexo=this.handleInputSexo.bind(this);
-        this.handleInputSede=this.handleInputSede.bind(this);
-        this.handleInputFacultad=this.handleInputFacultad.bind(this);
-        this.handleInputEscuela=this.handleInputEscuela.bind(this);
+
+        this.handleInput = this.handleInput.bind(this)
+        this.filtrar = this.filtrar.bind(this)
+        this.filtrar2 = this.filtrar2.bind(this)
+
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
+
     }
-    // leer del input Concepto
-    handleInputName(data){
-        this.setState({
-            nombre_apellido:data.target.value,
-            mensaje:""
-        });
-    }
-    handleInputSexo(data){
-        this.setState({
-            sexo:data.target.value,
-            mensaje:""
-        });
-    }
-    handleInputSede(data){
-        this.setState({
-            sede:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleInputFacultad(data){
-        this.setState({
-            facultad:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleInputEscuela(data){
-        this.setState({
-            escuela:data.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleChangeDate(date){
-        this.setState({
-            dates: date.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
-    handleChangeDate2(date){
-        this.setState({
-            dates2: date.target.value,
-            mensaje:"",
-            operacion:"c"
-        });
-    }
+
+
     handleSearchClick(){
         //let url = '';
         if(this.state.nombre_apellido === "" && this.state.sexo === ""&& this.state.sede === "" &&
@@ -144,41 +205,122 @@ class Formulario extends Component{
             }
         }
         return contenedor;
+
+      }
+
+    handleInput(e) {
+
+      const {value, name} = e.target
+      this.setState({
+        [name]:value
+
+      })
+      console.log(this.state);
+      console.log(e.target.name);
+
+
     }
+
+
+    filtrar(e){
+      var value = e.target.value
+      var lista = this.state.nombre
+      console.log(lista)
+      lista=  lista.filter(function(valueq){
+       return valueq.toLowerCase().search(
+        value.toLowerCase())  !== -1
+       //valueq.tolowerCase().search( value.tolowerCase()) !== -1;
+     })
+      this.setState({filtro: lista})
+
+        //.tolowerCase().search(  value.tolowerCase()) !== -1;}
+
+    // console.log(e.target.value);
+
+    }
+
+    handleSubmit(e){
+      e.preventDefault()
+
+    }
+
+
+
+    filtrar2(e){
+      var value = e.target.value
+      var lista = this.state.facultad
+      console.log(lista)
+      lista=  lista.filter(function(valueq){
+       return valueq.nombre_facultad.toLowerCase().search(
+        value.toLowerCase()) !== -1
+
+     })
+
+      console.log(lista);
+
+    }
+    handleChange = (selectedOption) => {
+
+    this.setState({ selectedOption });
+    console.log(selectedOption);
+
+    }
+
+
+
+
   render(){
+    const { selectedOption } = this.state;
+  	const value = selectedOption && selectedOption.value;
+    const option=this.state.nombre
     return(
         <div className="container">
             <div className="formulario" >
                 <div className="container ">
                     <Form inline>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
+                        <div className="input-group mb-3 ">
+                            <div className="input-group-prepend ">
                                 <span className="input-group-text" id="basic-addon1">Nombre o Apellido</span>
                             </div>
-                            <FormControl
-                                id="Nombre"
-                                type="text"
-                                value={this.state.nombre_apellido}
-                                onChange={this.handleInputName}
-                                placeholder="Nombre o Apellido"
-                            />
+
+                            <Select
+                                   name="nombre"
+                                    value={selectedOption}
+                                    multi
+                                    onChange={this.handleChange}
+                                    placeholder="Nombre"
+                                    removeSelected={true}
+                                    rtl={false}
+                                    simpleValue
+                                   options= {option}
+                                   valueKey='id_nombre'
+                                   labelKey='nombre'
+
+
+                                 />
+
+                            <list filtro ></list>
                         </div>
+
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
-                                <span className="input-group-text" id="basic-addon1">Sexo</span>
+                                <span className="input-group-text" id="basic-addon1" >Sexo</span>
                             </div>
                             <FormGroup controlId="formControlsSelect">
-                                <FormControl
+                                <Select
+                                    multi={true}
                                     type="select"
+                                    name="sexo"
                                     componentClass="select"
-                                    value={this.state.sexo}
-                                    onChange={this.handleInputSexo}
-                                    placeholder="Sexo"
-                                >
-                                    <option value="">Sexo</option>
-                                    <option value="femenino"> Femenino </option>
-                                    <option value="masculino"> Masculino </option>
-                                </FormControl>
+                                multi    placeholder="Sexo"
+                                    onChange={this.handleChange}
+                                    options={[
+                                      { value: 'femenino', label: 'Femenino' },
+                                      { value: 'masculino', label: 'Masculino' },
+
+                                    ]}
+                                  >
+                                </Select>
                             </FormGroup>
                         </div>
                     </Form>
@@ -190,10 +332,10 @@ class Formulario extends Component{
                                     <span className="input-group-text" id="basic-addon1">Sede</span>
                                 </div>
                                 < FormControl
-                                    id="Sede"
+                                    name="sede"
                                     type = " text "
-                                    value={this.state.sede}
-                                    onChange={this.handleInputSede}
+
+                                    onChange={this.handleInput}
                                     placeholder = " Sede "
                                 />
                             </div>
@@ -202,10 +344,10 @@ class Formulario extends Component{
                                     <span className="input-group-text" id="basic-addon1">Facultad</span>
                                 </div>
                                 < FormControl
-                                    id="Facultad"
+                                    name="facultad"
                                     type = " text "
-                                    value={this.state.facultad}
-                                    onChange={this.handleInputFacultad}
+
+                                    onChange={this.handleInput}
                                     placeholder = " Facultad "
                                 />
                             </div>
@@ -215,32 +357,54 @@ class Formulario extends Component{
                                 </div>
 
                                 < FormControl
-                                    id="Escuela"
+                                    name="escuela"
                                     type = " text "
-                                    value={this.state.escuela}
-                                    onChange={this.handleInputEscuela}
+                                    onChange={this.handleInput}
                                     placeholder = " Escuela "
                                 />
                             </div>
                     </Form>
                 </div>
-                <div className="container">
-                    <Form inline>
+                  <div className="container">
+                    <form inline>
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className="input-group-text" id="basic-addon1">Periodo</span>
                             </div>
                             <FormGroup inline >
-                                <input type="date" className="form-control"  onChange={this.handleChangeDate}/>
-                                <input type="date" className="form-control"  onChange={this.handleChangeDate2}/>
+                                <input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/>
+                                <input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/>
                             </FormGroup>
                         </div>
-                    </Form>
+                        <div>
+                        <FormGroup>
+                        <Select
+                               name="form-field-name"
+                                value={selectedOption}
+                                multi
+                                onChange={this.handleChange}
+
+                                removeSelected={true}
+                                rtl={false}
+                                simpleValue
+                               options={[
+                                 { value: 'one', label: 'Onjohkho' },
+                                 { value: 'two', label: 'Two' },
+                                  { value: 'df', label: 'sd' },
+                                   { value: 'twsdfo', label: 'Tasdwo' },
+                                    { value: 'dfsf', label: 'rwea' },
+
+                               ]}
+                             />
+
+                        </FormGroup>
+                        </div>
+                    </form>
                 </div>
                 <div className="container">
                     <Button  id="basic-addon1"
                         type="submit"
-                        onClick={this.handleSearchClick}
+                      //  onClick={this.handleSearchClick}
                     >Buscar</Button>
                 </div>
             </div>

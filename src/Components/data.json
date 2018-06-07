@@ -1,0 +1,200 @@
+data :[
+"sede":[
+  {
+    "id_sede":1,
+    "nombre_sede": "callao",
+    "facultad":[
+        {
+          "id_facultad":1
+        },
+        {
+          "id_facultad":2
+        },
+        {
+          "id_facultad":3
+        }
+
+    ],
+    "escuela":[
+      {
+        "id_escuela":1
+      },
+      {
+        "id_escuela":2
+      },
+      {
+        "id_escuela":3
+      },
+      {
+        "id_escuela":4
+      }
+    ]
+  },
+
+  {
+    "id_sede":2,
+    "nombre_sede": "caniete",
+    "facultad":[
+        {
+          "id_facultad":1
+        },
+        {
+          "id_facultad":3
+        }
+
+    ],
+    "escuela":[
+      {
+        "id_escuela":1
+      },
+      {
+        "id_escuela":2
+      },
+      {
+        "id_escuela":3
+      },
+      {
+        "id_escuela":4
+      }
+    ]
+  }
+
+],
+
+"facultad":[
+  {
+    "id_facultad":1,
+    "nombre_facultad": "FIS",
+    "sede":[
+        {
+          "id_sede":1
+        },
+        {
+          "id_sede":2
+        }
+
+    ],
+    "escuela":[
+      {
+        "id_escuela":1
+      },
+      {
+        "id_escuela":2
+      }
+    ]
+  },
+  {
+    "id_facultad":2,
+    "nombre_facultad": "FIARN",
+    "sede":[
+        {
+          "id_sede":1
+        }
+
+    ],
+    "escuela":[
+      {
+        "id_escuela":3
+      }
+    ]
+    },
+  {
+    "id_facultad":3,
+    "nombre_facultad": "FIME",
+    "sede":[
+        {
+          "id_sede":1
+        },
+        {
+          "id_sede":2
+        }
+
+    ],
+    "escuela":[
+      {
+        "id_escuela":4
+      }
+    ]
+  }
+
+],
+"escuela":[
+  {
+    "id_escuela":1,
+    "nombre_escuela": "sistemas",
+
+    "sede":[
+        {
+          "id_sede":1
+        },
+        {
+          "id_sede":2
+        },
+    ],
+
+    "facultad":[
+      {
+        "id_facultad":1
+      }
+    ]
+  },
+  {
+        "id_escuela":2,
+        "nombre_escuela": "computacion",
+        "sede":[
+            {
+              "id_sede":1
+            },
+            {
+              "id_sede":2
+            }
+        ],
+        "facultad":[
+
+          {
+            "id_facultad":1
+          }
+        ]
+      },
+
+  {
+            "id_escuela":3,
+            "nombre_escuela": "rn",
+            "sede":[
+                {
+                  "id_sede":1
+                },
+
+            ],
+            "facultad":[
+
+              {
+                "id_facultad":2
+              }
+            ]
+      },
+      {
+              "id_escuela":4,
+              "nombre_escuela": "Meca",
+                "sede":[
+                    {
+                      "id_sede":1
+                    },
+                    {
+                      "id_sede":2
+                    },
+
+
+                ],
+                "facultad":[
+
+                    {
+                      "id_facultad":3
+                    }
+
+                ]
+    }
+
+],
+
+]
