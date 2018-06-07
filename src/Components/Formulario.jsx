@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tablas from './TablaDatos';
-import { Button, Form, FormGroup, FormControl} from 'react-bootstrap';
+import {Col, Row, Label,Button, Form, FormGroup, FormControl} from 'react-bootstrap';
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -16,114 +16,211 @@ class Formulario extends Component{
               {"id_nombre":2, "nombre":"juan"},
               {"id_nombre":3, "nombre":"lucas"},
               {"id_nombre":4, "nombre":"julio"},
-            ],
-
-            sede:"",
-            facultad:"",
-            escuela:"",
+            ],      
+               
             sexo:"",
             desde:"",
             hasta:"",
             estado: false,
             operacion:'',
             isLoading:false,
-            sede2:[
-              {
-                "id_sede":1,
-                "nombre_sede": "callao",
-                "facultad":["1","2"],
-                "escuela":[
-
-                ]
-              },
-
-              {
-                "id_sede":2,
-                "nombre_sede": "caniete",
-                "facultad":[
+            sede:[
+                {
+                  "id_sede":1,
+                  "nombre_sede": "callao",
+                  "facultad":[
+                      {
+                        "id_facultad":1
+                      },
+                      {
+                        "id_facultad":2
+                      },
+                      {
+                        "id_facultad":3
+                      }
+              
+                  ],
+                  "escuela":[
+                    {
+                      "id_escuela":1
+                    },
+                    {
+                      "id_escuela":2
+                    },
+                    {
+                      "id_escuela":3
+                    },
+                    {
+                      "id_escuela":4
+                    }
+                  ]
+                },
+              
+                {
+                  "id_sede":2,
+                  "nombre_sede": "caniete",
+                  "facultad":[
+                      {
+                        "id_facultad":1
+                      },
+                      {
+                        "id_facultad":3
+                      }
+              
+                  ],
+                  "escuela":[
+                    {
+                      "id_escuela":1
+                    },
+                    {
+                      "id_escuela":2
+                    },
+                    {
+                      "id_escuela":3
+                    },
+                    {
+                      "id_escuela":4
+                    }
+                  ]
+                }
+              
+              ],
+              
+            facultad:[
+                {
+                  "id_facultad":1,
+                  "nombre_facultad": "FIS",
+                  "sede":[
+                      {
+                        "id_sede":1
+                      },
+                      {
+                        "id_sede":2
+                      }
+              
+                  ],
+                  "escuela":[
+                    {
+                      "id_escuela":1
+                    },
+                    {
+                      "id_escuela":2
+                    }
+                  ]
+                },
+                {
+                  "id_facultad":2,
+                  "nombre_facultad": "FIARN",
+                  "sede":[
+                      {
+                        "id_sede":1
+                      }
+              
+                  ],
+                  "escuela":[
+                    {
+                      "id_escuela":3
+                    }
+                  ]
+                  },
+                {
+                  "id_facultad":3,
+                  "nombre_facultad": "FIME",
+                  "sede":[
+                      {
+                        "id_sede":1
+                      },
+                      {
+                        "id_sede":2
+                      }
+              
+                  ],
+                  "escuela":[
+                    {
+                      "id_escuela":4
+                    }
+                  ]
+                }
+              
+              ],
+              escuela:[
+                {
+                  "id_escuela":1,
+                  "nombre_escuela": "sistemas",
+              
+                  "sede":[
+                      {
+                        "id_sede":1
+                      },
+                      {
+                        "id_sede":2
+                      },
+                  ],
+              
+                  "facultad":[
                     {
                       "id_facultad":1
-                    },
-                    {
-                      "id_facultad":3
                     }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":1
-                  },
-                  {
-                    "id_escuela":2
-                  },
-                  {
-                    "id_escuela":3
-                  },
-                  {
-                    "id_escuela":4
-                  }
-                ]
-              }
-
-            ],
-
-            "facultad":[
-              {
-                "id_facultad":1,
-                "nombre_facultad": "FIS",
-                "sede":[
-                    {
-                      "id_sede":1
-                    },
-                    {
-                      "id_sede":2
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":1
-                  },
-                  {
-                    "id_escuela":2
-                  }
-                ]
-              },
-              {
-                "id_facultad":2,
-                "nombre_facultad": "FIARN",
-                "sede":[
-                    {
-                      "id_sede":1
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":3
-                  }
-                ]
+                  ]
                 },
-              {
-                "id_facultad":3,
-                "nombre_facultad": "FIME",
-                "sede":[
-                    {
-                      "id_sede":1
+                {
+                      "id_escuela":2,
+                      "nombre_escuela": "computacion",
+                      "sede":[
+                          {
+                            "id_sede":1
+                          },
+                          {
+                            "id_sede":2
+                          }
+                      ],
+                      "facultad":[
+              
+                        {
+                          "id_facultad":1
+                        }
+                      ]
+                    },
+              
+                {
+                          "id_escuela":3,
+                          "nombre_escuela": "rn",
+                          "sede":[
+                              {
+                                "id_sede":1
+                              },
+              
+                          ],
+                          "facultad":[
+              
+                            {
+                              "id_facultad":2
+                            }
+                          ]
                     },
                     {
-                      "id_sede":2
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":4
+                            "id_escuela":4,
+                            "nombre_escuela": "Meca",
+                              "sede":[
+                                  {
+                                    "id_sede":1
+                                  },
+                                  {
+                                    "id_sede":2
+                                  },
+              
+              
+                              ],
+                              "facultad":[
+              
+                                  {
+                                    "id_facultad":3
+                                  }
+              
+                              ]
                   }
-                ]
-              }
-
-            ],
+              
+              ],
 
             filtro:[]
 
@@ -273,8 +370,147 @@ class Formulario extends Component{
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.state.nombre
+    const option2=this.state.sede
+    const option3=this.state.facultad
+    const option4=this.state.escuela
+
     return(
-        <div className="container">
+       <div>
+           <div className="contiener" >
+            <Form  >
+                <Row >
+                    <FormGroup  className=" col-sm-8" inline>
+                        
+                            <span >Nombre o Apellido</span>
+                            <Select
+                                        name="nombre"
+                                        value={selectedOption}
+                                        multi
+                                        onChange={this.handleChange}
+                                        placeholder="Nombre"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options= {option}
+                                        valueKey='id_nombre'
+                                        labelKey='nombre'
+
+                                    
+                                        />
+
+                    </FormGroup>
+                    <FormGroup className=" col-sm-4">
+                            <span >Sexo</span>
+
+                            <Select
+                                        name="sexo"
+                                        value={selectedOption}
+                                        multi={false}
+                                        onChange={this.handleChange}
+                                        placeholder="Seleccionar Sexo"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options={[
+                                            { value: 'femenino', label: 'Femenino' },
+                                            { value: 'masculino', label: 'Masculino' },
+                                            ]}
+
+                                        
+
+
+                                        />
+
+                    </FormGroup>
+                                    
+               </Row>
+               <Row>
+                    <FormGroup className="col-4 .col-md-4">
+                     <span >Sede</span>
+                     
+                     <Select
+                                    name="sede"
+                                    value={selectedOption}
+                                    multi={true}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccionar Sede"
+                                    removeSelected={true}
+                                    rtl={false}
+                                    simpleValue
+                                    options= {option2}
+                                    valueKey='id_sede'
+                                    labelKey='nombre_sede'
+
+                                 />
+
+                </FormGroup>
+                <FormGroup className="col-4 .col-md-4">
+                    <span >Facultad</span>
+                        
+                        <Select
+                                    name="facultad"
+                                    value={selectedOption}
+                                    multi={true}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccionar Facultad"
+                                    removeSelected={true}
+                                    rtl={false}
+                                    simpleValue
+                                    options= {option3}
+                                    valueKey='id_facultad'
+                                    labelKey='nombre_facultad'
+
+                                    />
+
+                    </FormGroup>
+                    <FormGroup className="col-4 .col-md-4">
+                        <span >Escuela</span>
+                       
+                        <Select
+                                    name="escuela"
+                                    value={selectedOption}
+                                    multi={true}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccionar Escuela"
+                                    removeSelected={true}
+                                    col-8           rtl={false}
+                                    simpleValue
+                                    options= {option4}
+                                    valueKey='id_escuela'
+                                    labelKey='nombre_escuela'
+
+                                    />
+
+                    </FormGroup>
+               </Row>
+                <Row>
+                <span  >Periodo</span>
+                    <FormGroup className="col-4 row justify-content-center " >
+                            
+                        <span>Desde</span>
+                             <Col className=""><input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/></Col>
+                    </FormGroup>
+                    <FormGroup className="col-4 row justify-content-center" >
+                            
+                         <span>Hasta</span>  
+                             <Col className="" ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>                   
+                    </FormGroup>
+                </Row>
+                    
+                    
+            <Row className="col-auto">
+                 <Button  id="basic-addon1" type="submit"> Buscar</Button>                          
+            </Row>
+            </Form> 
+
+           </div>
+
+
+
+
+
+
+            <div className="container">
             <div className="formulario" >
                 <div className="container ">
                     <Form inline>
@@ -294,6 +530,7 @@ class Formulario extends Component{
                                     simpleValue
                                    options= {option}
                                    valueKey='id_nombre'
+                                             
                                    labelKey='nombre'
 
 
@@ -326,7 +563,7 @@ class Formulario extends Component{
                     </Form>
                 </div>
                 <div className="container">
-                    <Form inline>
+                    <Form >
                             <div className="input-group mb-3">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" id="basic-addon1">Sede</span>
@@ -412,6 +649,7 @@ class Formulario extends Component{
                 {this.mostrarData()}
             </div>
         </div>
+       </div>
     )
   }
 }
