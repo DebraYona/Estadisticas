@@ -71,5 +71,60 @@
     "telefono": "789523192",
     "direccion": "por aqui y por alli"
   }
-]
+],
+"columns":[
+
+  {
+      "Header": "Codigo ",
+      "accessor": "codigo"
+  },
+  {
+      "Header": "Nombre",
+      "accessor": "nombre",
+      "foldable": true
+  },
+  {
+      "Header": "Apellido Paterno",
+      "accessor": "apepater",
+      "foldable": true
+  },
+  {
+      "Header": "Apellido Materno",
+      "accessor": "apemater",
+      "foldable": true
+  },
+
+  {
+      "Header": "Sede",
+      "accessor": "sede",
+      "foldable": true
+  },
+  {
+      "Header": "Facultad",
+      "accessor": "facultad",
+      "foldable": true
+  },
+  {
+      "Header": "Escuela",
+      "accessor": "escuela",
+      "foldable": true
+  },
+  {
+      "Header": "Correo",
+      "accessor": "correo",
+      "foldable": true
+  },
+  {
+      "Header": "Telefono",
+      "accessor": "telefono",
+      "foldable": true
+  },
+  {
+      "Header": "Direccion",
+      "accessor": "direccion",
+      "foldable": true
+  }]
+
+   
 }
+

@@ -8,7 +8,8 @@
     {"id_nombre":5, "nombre":"judas"}
   ],  
   "sexo":"",    
-
+  "desde":"",
+  "hasta":"",
 
 
 
