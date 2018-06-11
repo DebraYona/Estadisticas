@@ -1,0 +1,75 @@
+{
+"prueba":[{
+    "codigo":"15200204",
+    "nombre":"debra",
+    "apepater":"chacaliaza",
+    "apemater":"Llamosa",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "de.chacaliaza@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  },
+  {
+    "codigo":"15200300",
+    "nombre":"lucas",
+    "apepater":"Llano",
+    "apemater":"Esta",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "lu.llano@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  },
+  {
+    "codigo":"15200300",
+    "nombre":"lucas",
+    "apepater":"Llano",
+    "apemater":"Esta",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "lu.llano@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  },
+  {
+    "codigo":"15200300",
+    "nombre":"lucas",
+    "apepater":"",
+    "apemater":"Esta",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "lu.llano@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  },
+  {
+    "codigo":"15200300",
+    "nombre":"lucas",
+    "apepater":"Llano",
+    "apemater":"Esta",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "lu.llano@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  },
+  {
+    "codigo":"15200300",
+    "nombre":"lucas",
+    "apepater":"Llano",
+    "apemater":"Esta",
+    "sede": "Lima",
+    "facultad":"Fis",
+    "escuela":"sis",
+    "correo": "lu.llano@gmail.com",
+    "telefono": "789523192",
+    "direccion": "por aqui y por alli"
+  }
+]
+}

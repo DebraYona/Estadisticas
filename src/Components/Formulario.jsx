@@ -9,13 +9,22 @@ class Formulario extends Component{
         super();
 
         this.state = {
-            selectedOption: [],
+            selectedOption: { 
+              nombre:[],
+              sexo:" ",
+              sede:[],
+              facultad:[],
+              escuela:[],
+              inicio:"" ,
+              fin:""
+            },
             data:[],
             nombre:[
               {"id_nombre":1, "nombre":"debra"},
               {"id_nombre":2, "nombre":"juan"},
               {"id_nombre":3, "nombre":"lucas"},
               {"id_nombre":4, "nombre":"julio"},
+              {"id_nombre":5, "nombre":"judas"},
             ],      
                
             sexo:"",
@@ -305,19 +314,7 @@ class Formulario extends Component{
 
       }
 
-    handleInput(e) {
-
-      const {value, name} = e.target
-      this.setState({
-        [name]:value
-
-      })
-      console.log(this.state);
-      console.log(e.target.name);
-
-
-    }
-
+    
 
     filtrar(e){
       var value = e.target.value
@@ -356,10 +353,27 @@ class Formulario extends Component{
       console.log(lista);
 
     }
-    handleChange = (selectedOption) => {
+    handleChange = (values,n) => {
+      console.log(this.state.selectedOption[n])
+     this.setState(prevState=>{
+       let selectedOption = prevState.selectedOption;
+       selectedOption[n]=values;
+       return {selectedOption:selectedOption}
+     })
+    }
 
-    this.setState({ selectedOption });
-    console.log(selectedOption);
+
+    
+    handleInput(e) {
+
+      const {value, name} = e.target.selectedOption
+      this.setState({
+        [name]:value
+
+      })
+      console.log(this.state);
+      console.log(e.target.name);
+
 
     }
 
@@ -367,6 +381,8 @@ class Formulario extends Component{
 
 
   render(){
+    console.log(this.state.selectedOption)
+
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.state.nombre
@@ -384,9 +400,9 @@ class Formulario extends Component{
                             <span >Nombre o Apellido</span>
                             <Select
                                         name="nombre"
-                                        value={selectedOption}
+                                        value={selectedOption.nombre}
                                         multi
-                                        onChange={this.handleChange}
+                                        onChange={(values)=>this.handleChange(values,"nombre")}
                                         placeholder="Nombre"
                                         removeSelected={true}
                                         rtl={false}
@@ -394,7 +410,7 @@ class Formulario extends Component{
                                         options= {option}
                                         valueKey='id_nombre'
                                         labelKey='nombre'
-
+                                        ref={node=>this.node}
                                     
                                         />
 
@@ -404,9 +420,9 @@ class Formulario extends Component{
 
                             <Select
                                         name="sexo"
-                                        value={selectedOption}
+                                        value={selectedOption.sexo}
                                         multi={false}
-                                        onChange={this.handleChange}
+                                        onChange={(values)=>this.handleChange(values,"sexo")}
                                         placeholder="Seleccionar Sexo"
                                         removeSelected={true}
                                         rtl={false}
@@ -430,9 +446,9 @@ class Formulario extends Component{
                      
                      <Select
                                     name="sede"
-                                    value={selectedOption}
+                                    value={selectedOption.sede}
                                     multi={true}
-                                    onChange={this.handleChange}
+                                    onChange={(values)=>this.handleChange(values,"sede")}
                                     placeholder="Seleccionar Sede"
                                     removeSelected={true}
                                     rtl={false}
@@ -449,9 +465,9 @@ class Formulario extends Component{
                         
                         <Select
                                     name="facultad"
-                                    value={selectedOption}
+                                    value={selectedOption.facultad}
                                     multi={true}
-                                    onChange={this.handleChange}
+                                    onChange={(values)=>this.handleChange(values,"facultad")}
                                     placeholder="Seleccionar Facultad"
                                     removeSelected={true}
                                     rtl={false}
@@ -468,9 +484,9 @@ class Formulario extends Component{
                        
                         <Select
                                     name="escuela"
-                                    value={selectedOption}
+                                    value={selectedOption.escuela}
                                     multi={true}
-                                    onChange={this.handleChange}
+                                    onChange={(values)=>this.handleChange(values,"escuela")}
                                     placeholder="Seleccionar Escuela"
                                     removeSelected={true}
                                     col-8           rtl={false}
@@ -488,7 +504,7 @@ class Formulario extends Component{
                     <FormGroup className="col-4 row justify-content-center " >
                             
                         <span>Desde</span>
-                             <Col className=""><input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/></Col>
+                             <Col className=""><input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
                     </FormGroup>
                     <FormGroup className="col-4 row justify-content-center" >
                             

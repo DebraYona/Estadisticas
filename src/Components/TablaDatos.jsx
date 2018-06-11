@@ -5,6 +5,7 @@ import ReactTable from "react-table";
 import ReactStory from 'react-story'
 import 'react-table/react-table.css'
 import Formulario from "./Formulario"
+import {prueba} from "../Data/data2.json"
 
 
 class Tablas extends Component{
@@ -60,6 +61,10 @@ class Tablas extends Component{
           accessor: "direccion",
           foldable: true,
       }]
+
+      const data2=prueba
+
+    /* 
       const data = [{
         codigo:'15200204',
         nombre:'debra',
@@ -97,11 +102,16 @@ class Tablas extends Component{
         direccion: 'por aqui y por alli'
       }]
 
+
+   */
+      
+     
+
     return(
       <div>
+        {console.log(data2)}
 
-
-        <ReactTable  className="tabla" responsive columns={columns} data ={data}/>
+        <ReactTable  className="tabla" responsive columns={columns} data ={data2}/>
 
 
       </div>

@@ -1,4 +1,19 @@
 
+{
+  "nombre":[
+    {"id_nombre":1, "nombre":"debra"},
+    {"id_nombre":2, "nombre":"juan"},
+    {"id_nombre":3, "nombre":"lucas"},
+    {"id_nombre":4, "nombre":"julio"},
+    {"id_nombre":5, "nombre":"judas"}
+  ],  
+  "sexo":"",    
+
+
+
+
+
+
 "sede":[
   {
     "id_sede":1,
@@ -129,7 +144,7 @@
         },
         {
           "id_sede":2
-        },
+        }
     ],
 
     "facultad":[
@@ -163,7 +178,7 @@
             "sede":[
                 {
                   "id_sede":1
-                },
+                }
 
             ],
             "facultad":[
@@ -182,7 +197,7 @@
                     },
                     {
                       "id_sede":2
-                    },
+                    }
 
 
                 ],
@@ -195,6 +210,7 @@
                 ]
     }
 
-],
+]
 
 
+}
