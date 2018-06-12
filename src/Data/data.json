@@ -10,6 +10,7 @@
   "sexo":"",    
   "desde":"",
   "hasta":"",
+  "grado_titulo":"",
 
 
 
@@ -211,6 +212,17 @@
                 ]
     }
 
+],
+
+"selectedOption": [ 
+  "nombre":[],
+  "sexo":" ",
+  "sede":[],
+  "facultad":[],
+  "escuela":[],
+  "inicio":"" ,
+  "fin":"",
+  "grado_titulo":""
 ]
 
 

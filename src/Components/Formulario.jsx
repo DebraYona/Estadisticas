@@ -4,6 +4,8 @@ import {Col, Row, Label,Button, Form, FormGroup, FormControl} from 'react-bootst
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import {prueba } from "../Data/data2.json";
+
 class Formulario extends Component{
     constructor(){
         super();
@@ -19,220 +21,16 @@ class Formulario extends Component{
               fin:"",
               grado_titulo:""
             },
-            data:[],
-            nombre:[
-              {"id_nombre":1, "nombre":"debra"},
-              {"id_nombre":2, "nombre":"juan"},
-              {"id_nombre":3, "nombre":"lucas"},
-              {"id_nombre":4, "nombre":"julio"},
-              {"id_nombre":5, "nombre":"judas"},
-            ],      
-               
-            sexo:"",
-            desde:"",
-            hasta:"",
-            grado_titulo:"",
-            estado: false,
-            operacion:'',
-            isLoading:false,
-            sede:[
-                {
-                  "id_sede":1,
-                  "nombre_sede": "callao",
-                  "facultad":[
-                      {
-                        "id_facultad":1
-                      },
-                      {
-                        "id_facultad":2
-                      },
-                      {
-                        "id_facultad":3
-                      }
-              
-                  ],
-                  "escuela":[
-                    {
-                      "id_escuela":1
-                    },
-                    {
-                      "id_escuela":2
-                    },
-                    {
-                      "id_escuela":3
-                    },
-                    {
-                      "id_escuela":4
-                    }
-                  ]
-                },
-              
-                {
-                  "id_sede":2,
-                  "nombre_sede": "caniete",
-                  "facultad":[
-                      {
-                        "id_facultad":1
-                      },
-                      {
-                        "id_facultad":3
-                      }
-              
-                  ],
-                  "escuela":[
-                    {
-                      "id_escuela":1
-                    },
-                    {
-                      "id_escuela":2
-                    },
-                    {
-                      "id_escuela":3
-                    },
-                    {
-                      "id_escuela":4
-                    }
-                  ]
-                }
-              
-              ],
-              
-            facultad:[
-                {
-                  "id_facultad":1,
-                  "nombre_facultad": "FIS",
-                  "sede":[
-                      {
-                        "id_sede":1
-                      },
-                      {
-                        "id_sede":2
-                      }
-              
-                  ],
-                  "escuela":[
-                    {
-                      "id_escuela":1
-                    },
-                    {
-                      "id_escuela":2
-                    }
-                  ]
-                },
-                {
-                  "id_facultad":2,
-                  "nombre_facultad": "FIARN",
-                  "sede":[
-                      {
-                        "id_sede":1
-                      }
-              
-                  ],
-                  "escuela":[
-                    {
-                      "id_escuela":3
-                    }
-                  ]
-                  },
-                {
-                  "id_facultad":3,
-                  "nombre_facultad": "FIME",
-                  "sede":[
-                      {
-                        "id_sede":1
-                      },
-                      {
-                        "id_sede":2
-                      }
-              
-                  ],
-                  "escuela":[
-                    {
-                      "id_escuela":4
-                    }
-                  ]
-                }
-              
-              ],
-              escuela:[
-                {
-                  "id_escuela":1,
-                  "nombre_escuela": "sistemas",
-              
-                  "sede":[
-                      {
-                        "id_sede":1
-                      },
-                      {
-                        "id_sede":2
-                      },
-                  ],
-              
-                  "facultad":[
-                    {
-                      "id_facultad":1
-                    }
-                  ]
-                },
-                {
-                      "id_escuela":2,
-                      "nombre_escuela": "computacion",
-                      "sede":[
-                          {
-                            "id_sede":1
-                          },
-                          {
-                            "id_sede":2
-                          }
-                      ],
-                      "facultad":[
-              
-                        {
-                          "id_facultad":1
-                        }
-                      ]
-                    },
-              
-                {
-                          "id_escuela":3,
-                          "nombre_escuela": "rn",
-                          "sede":[
-                              {
-                                "id_sede":1
-                              },
-              
-                          ],
-                          "facultad":[
-              
-                            {
-                              "id_facultad":2
-                            }
-                          ]
-                    },
-                    {
-                            "id_escuela":4,
-                            "nombre_escuela": "Meca",
-                              "sede":[
-                                  {
-                                    "id_sede":1
-                                  },
-                                  {
-                                    "id_sede":2
-                                  },
-              
-              
-                              ],
-                              "facultad":[
-              
-                                  {
-                                    "id_facultad":3
-                                  }
-              
-                              ]
-                  }
-              
-              ],
-
+            data :{
+              nombre:[],
+              sexo:" ",
+              sede:[],
+              facultad:[],
+              escuela:[],
+              inicio:"" ,
+              fin:"",
+              grado_titulo:""
+            },           
             filtro:[]
 
         };
@@ -240,11 +38,12 @@ class Formulario extends Component{
         this.handleInput = this.handleInput.bind(this)
         this.filtrar = this.filtrar.bind(this)
         this.filtrar2 = this.filtrar2.bind(this)
-
+        this.fetchData= this.fetchData.bind(this)
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
 
     }
+    
 
 
     handleSearchClick(){
@@ -315,6 +114,15 @@ class Formulario extends Component{
         return contenedor;
 
       }
+      fetchData(){
+
+         this.setState( { data:prueba } ) 
+            
+    }
+    componentDidMount(){
+
+      this.fetchData()
+  }
 
     
 
@@ -378,19 +186,19 @@ class Formulario extends Component{
 
 
     }
-
+    
 
 
 
   render(){
     console.log(this.state.selectedOption)
-
     const { selectedOption } = this.state;
-  	const value = selectedOption && selectedOption.value;
-    const option=this.state.nombre
+  	const value = selectedOption && selectedOption.value; 
+    const option=this.state.data.nombre
     const option2=this.state.sede
     const option3=this.state.facultad
     const option4=this.state.escuela
+    
 
     return(
        <div className="formulario" >
