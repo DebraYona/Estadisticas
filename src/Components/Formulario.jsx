@@ -16,7 +16,8 @@ class Formulario extends Component{
               facultad:[],
               escuela:[],
               inicio:"" ,
-              fin:""
+              fin:"",
+              grado_titulo:""
             },
             data:[],
             nombre:[
@@ -30,6 +31,7 @@ class Formulario extends Component{
             sexo:"",
             desde:"",
             hasta:"",
+            grado_titulo:"",
             estado: false,
             operacion:'',
             isLoading:false,
@@ -391,7 +393,7 @@ class Formulario extends Component{
     const option4=this.state.escuela
 
     return(
-       <div>
+       <div className="formulario" >
            <div className="contiener" >
             <Form  >
                 <Row >
@@ -501,22 +503,47 @@ class Formulario extends Component{
                </Row>
                 <Row>
                 <span  >Periodo</span>
-                    <FormGroup className="col-4 row justify-content-center " >
+                    <FormGroup className="col-4 .col-md-4 ml-5" >                        
+                    <FormGroup className="col-4 row justify-content-center  " >
                             
-                        <span>Desde</span>
-                             <Col className=""><input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
+                        <span className="ml-2" >Desde</span>
+                             <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
                     </FormGroup>
                     <FormGroup className="col-4 row justify-content-center" >
                             
-                         <span>Hasta</span>  
-                             <Col className="" ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>                   
+                         <span className="ml-2" >Hasta</span>  
+                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>                   
+                    </FormGroup>
+                    </FormGroup>
+                    <FormGroup className=" col-sm-4">
+                            <span >Grado o Título</span>
+
+                            <Select
+                                        name="grado_titulo"
+                                        value={selectedOption.grado_titulo}
+                                        multi={false}
+                                        onChange={(values)=>this.handleChange(values,"grado_titulo")}
+                                        placeholder="Seleccionar grado/titulo"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options={[
+                                            { value: 'grado', label: 'Grado' },
+                                            { value: 'titulo', label: 'Titulo' },
+                                            ]}
+
+                                        
+
+
+                                        />
+
                     </FormGroup>
                 </Row>
                     
                     
-            <Row className="col-auto">
-                 <Button  id="basic-addon1" type="submit"> Buscar</Button>                          
-            </Row>
+              <Row className="right  ">
+                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Buscar</Button>                          
+              </Row>
             </Form> 
 
            </div>
