@@ -13,13 +13,13 @@ class Tablas extends Component{
       const data2=prueba
       const columns2=columns
 
-  
-      
-     
+
+
+
 
     return(
       <div>
-        {console.log(columns2)}
+      
 
         <ReactTable  className="tabla" responsive columns={columns2} data ={data2}/>
 

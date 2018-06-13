@@ -4,14 +4,14 @@ import {Col, Row, Label,Button, Form, FormGroup, FormControl} from 'react-bootst
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import {prueba } from "../Data/data2.json";
+import axios from 'axios';
 
 class Formulario extends Component{
     constructor(){
         super();
 
         this.state = {
-            selectedOption: { 
+            selectedOption: {
               nombre:[],
               sexo:" ",
               sede:[],
@@ -21,7 +21,7 @@ class Formulario extends Component{
               fin:"",
               grado_titulo:""
             },
-            data :{
+            datos :{
               nombre:[],
               sexo:" ",
               sede:[],
@@ -30,7 +30,7 @@ class Formulario extends Component{
               inicio:"" ,
               fin:"",
               grado_titulo:""
-            },           
+            },
             filtro:[]
 
         };
@@ -43,7 +43,7 @@ class Formulario extends Component{
         this.mostrarData=this.mostrarData.bind(this);
 
     }
-    
+
 
 
     handleSearchClick(){
@@ -115,16 +115,31 @@ class Formulario extends Component{
 
       }
       fetchData(){
+        axios.get('../../public/Data/data2.json')
+        .then(response =>{
+           this.setState({
+             datos: response.data.nombre
+        })
+        })
+        .catch(error =>{
+          console.log(error);
+        })
+        // this.setState( { data:prueba } )
 
-         this.setState( { data:prueba } ) 
-            
     }
     componentDidMount(){
+      axios.get('../Data/data2.json')
+      .then(response=>{
+        console.log(response.data.prueba);
+        this.setState({filtro: response.data.prueba})
+      })
+      .catch(error =>{
+        console.log(error);
+      })
 
-      this.fetchData()
   }
 
-    
+
 
     filtrar(e){
       var value = e.target.value
@@ -173,7 +188,7 @@ class Formulario extends Component{
     }
 
 
-    
+
     handleInput(e) {
 
       const {value, name} = e.target.selectedOption
@@ -186,19 +201,22 @@ class Formulario extends Component{
 
 
     }
-    
+
 
 
 
   render(){
+    console.log(this.state.filtro.nombre);
     console.log(this.state.selectedOption)
     const { selectedOption } = this.state;
-  	const value = selectedOption && selectedOption.value; 
-    const option=this.state.data.nombre
+  	const value = selectedOption && selectedOption.value;
+    const option=this.state.filtro.map((dato, i) =>{
+      dato.nombre
+    })
     const option2=this.state.sede
     const option3=this.state.facultad
     const option4=this.state.escuela
-    
+
 
     return(
        <div className="formulario" >
@@ -206,7 +224,7 @@ class Formulario extends Component{
             <Form  >
                 <Row >
                     <FormGroup  className=" col-sm-8" inline>
-                        
+
                             <span >Nombre o Apellido</span>
                             <Select
                                         name="nombre"
@@ -221,7 +239,7 @@ class Formulario extends Component{
                                         valueKey='id_nombre'
                                         labelKey='nombre'
                                         ref={node=>this.node}
-                                    
+
                                         />
 
                     </FormGroup>
@@ -242,18 +260,18 @@ class Formulario extends Component{
                                             { value: 'masculino', label: 'Masculino' },
                                             ]}
 
-                                        
+
 
 
                                         />
 
                     </FormGroup>
-                                    
+
                </Row>
                <Row>
                     <FormGroup className="col-4 .col-md-4">
                      <span >Sede</span>
-                     
+
                      <Select
                                     name="sede"
                                     value={selectedOption.sede}
@@ -272,7 +290,7 @@ class Formulario extends Component{
                 </FormGroup>
                 <FormGroup className="col-4 .col-md-4">
                     <span >Facultad</span>
-                        
+
                         <Select
                                     name="facultad"
                                     value={selectedOption.facultad}
@@ -291,7 +309,7 @@ class Formulario extends Component{
                     </FormGroup>
                     <FormGroup className="col-4 .col-md-4">
                         <span >Escuela</span>
-                       
+
                         <Select
                                     name="escuela"
                                     value={selectedOption.escuela}
@@ -311,16 +329,16 @@ class Formulario extends Component{
                </Row>
                 <Row>
                 <span  >Periodo</span>
-                    <FormGroup className="col-4 .col-md-4 ml-5" >                        
+                    <FormGroup className="col-4 .col-md-4 ml-5" >
                     <FormGroup className="col-4 row justify-content-center  " >
-                            
+
                         <span className="ml-2" >Desde</span>
                              <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
                     </FormGroup>
                     <FormGroup className="col-4 row justify-content-center" >
-                            
-                         <span className="ml-2" >Hasta</span>  
-                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>                   
+
+                         <span className="ml-2" >Hasta</span>
+                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>
                     </FormGroup>
                     </FormGroup>
                     <FormGroup className=" col-sm-4">
@@ -340,19 +358,19 @@ class Formulario extends Component{
                                             { value: 'titulo', label: 'Titulo' },
                                             ]}
 
-                                        
+
 
 
                                         />
 
                     </FormGroup>
                 </Row>
-                    
-                    
+
+
               <Row className="right  ">
-                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Buscar</Button>                          
+                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Buscar</Button>
               </Row>
-            </Form> 
+            </Form>
 
            </div>
 
