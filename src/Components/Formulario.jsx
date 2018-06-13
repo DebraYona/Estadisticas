@@ -1,130 +1,36 @@
 import React, { Component } from 'react';
 import Tablas from './TablaDatos';
-import { Button, Form, FormGroup, FormControl} from 'react-bootstrap';
+import {Col, Row, Label,Button, Form, FormGroup, FormControl} from 'react-bootstrap';
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import {prueba } from "../Data/data2.json";
+
 class Formulario extends Component{
     constructor(){
         super();
 
         this.state = {
-            selectedOption: [],
-            data:[],
-            nombre:[
-              {"id_nombre":1, "nombre":"debra"},
-              {"id_nombre":2, "nombre":"juan"},
-              {"id_nombre":3, "nombre":"lucas"},
-              {"id_nombre":4, "nombre":"julio"},
-            ],
-
-            sede:"",
-            facultad:"",
-            escuela:"",
-            sexo:"",
-            desde:"",
-            hasta:"",
-            estado: false,
-            operacion:'',
-            isLoading:false,
-            sede2:[
-              {
-                "id_sede":1,
-                "nombre_sede": "callao",
-                "facultad":["1","2"],
-                "escuela":[
-
-                ]
-              },
-
-              {
-                "id_sede":2,
-                "nombre_sede": "caniete",
-                "facultad":[
-                    {
-                      "id_facultad":1
-                    },
-                    {
-                      "id_facultad":3
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":1
-                  },
-                  {
-                    "id_escuela":2
-                  },
-                  {
-                    "id_escuela":3
-                  },
-                  {
-                    "id_escuela":4
-                  }
-                ]
-              }
-
-            ],
-
-            "facultad":[
-              {
-                "id_facultad":1,
-                "nombre_facultad": "FIS",
-                "sede":[
-                    {
-                      "id_sede":1
-                    },
-                    {
-                      "id_sede":2
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":1
-                  },
-                  {
-                    "id_escuela":2
-                  }
-                ]
-              },
-              {
-                "id_facultad":2,
-                "nombre_facultad": "FIARN",
-                "sede":[
-                    {
-                      "id_sede":1
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":3
-                  }
-                ]
-                },
-              {
-                "id_facultad":3,
-                "nombre_facultad": "FIME",
-                "sede":[
-                    {
-                      "id_sede":1
-                    },
-                    {
-                      "id_sede":2
-                    }
-
-                ],
-                "escuela":[
-                  {
-                    "id_escuela":4
-                  }
-                ]
-              }
-
-            ],
-
+            selectedOption: { 
+              nombre:[],
+              sexo:" ",
+              sede:[],
+              facultad:[],
+              escuela:[],
+              inicio:"" ,
+              fin:"",
+              grado_titulo:""
+            },
+            data :{
+              nombre:[],
+              sexo:" ",
+              sede:[],
+              facultad:[],
+              escuela:[],
+              inicio:"" ,
+              fin:"",
+              grado_titulo:""
+            },           
             filtro:[]
 
         };
@@ -132,11 +38,12 @@ class Formulario extends Component{
         this.handleInput = this.handleInput.bind(this)
         this.filtrar = this.filtrar.bind(this)
         this.filtrar2 = this.filtrar2.bind(this)
-
+        this.fetchData= this.fetchData.bind(this)
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
 
     }
+    
 
 
     handleSearchClick(){
@@ -207,20 +114,17 @@ class Formulario extends Component{
         return contenedor;
 
       }
+      fetchData(){
 
-    handleInput(e) {
-
-      const {value, name} = e.target
-      this.setState({
-        [name]:value
-
-      })
-      console.log(this.state);
-      console.log(e.target.name);
-
-
+         this.setState( { data:prueba } ) 
+            
     }
+    componentDidMount(){
 
+      this.fetchData()
+  }
+
+    
 
     filtrar(e){
       var value = e.target.value
@@ -259,159 +163,205 @@ class Formulario extends Component{
       console.log(lista);
 
     }
-    handleChange = (selectedOption) => {
-
-    this.setState({ selectedOption });
-    console.log(selectedOption);
-
+    handleChange = (values,n) => {
+      console.log(this.state.selectedOption[n])
+     this.setState(prevState=>{
+       let selectedOption = prevState.selectedOption;
+       selectedOption[n]=values;
+       return {selectedOption:selectedOption}
+     })
     }
 
+
+    
+    handleInput(e) {
+
+      const {value, name} = e.target.selectedOption
+      this.setState({
+        [name]:value
+
+      })
+      console.log(this.state);
+      console.log(e.target.name);
+
+
+    }
+    
 
 
 
   render(){
+    console.log(this.state.selectedOption)
     const { selectedOption } = this.state;
-  	const value = selectedOption && selectedOption.value;
-    const option=this.state.nombre
+  	const value = selectedOption && selectedOption.value; 
+    const option=this.state.data.nombre
+    const option2=this.state.sede
+    const option3=this.state.facultad
+    const option4=this.state.escuela
+    
+
     return(
-        <div className="container">
-            <div className="formulario" >
-                <div className="container ">
-                    <Form inline>
-                        <div className="input-group mb-3 ">
-                            <div className="input-group-prepend ">
-                                <span className="input-group-text" id="basic-addon1">Nombre o Apellido</span>
-                            </div>
+       <div className="formulario" >
+           <div className="contiener" >
+            <Form  >
+                <Row >
+                    <FormGroup  className=" col-sm-8" inline>
+                        
+                            <span >Nombre o Apellido</span>
+                            <Select
+                                        name="nombre"
+                                        value={selectedOption.nombre}
+                                        multi
+                                        onChange={(values)=>this.handleChange(values,"nombre")}
+                                        placeholder="Nombre"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options= {option}
+                                        valueKey='id_nombre'
+                                        labelKey='nombre'
+                                        ref={node=>this.node}
+                                    
+                                        />
+
+                    </FormGroup>
+                    <FormGroup className=" col-sm-4">
+                            <span >Sexo</span>
 
                             <Select
-                                   name="nombre"
-                                    value={selectedOption}
-                                    multi
-                                    onChange={this.handleChange}
-                                    placeholder="Nombre"
+                                        name="sexo"
+                                        value={selectedOption.sexo}
+                                        multi={false}
+                                        onChange={(values)=>this.handleChange(values,"sexo")}
+                                        placeholder="Seleccionar Sexo"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options={[
+                                            { value: 'femenino', label: 'Femenino' },
+                                            { value: 'masculino', label: 'Masculino' },
+                                            ]}
+
+                                        
+
+
+                                        />
+
+                    </FormGroup>
+                                    
+               </Row>
+               <Row>
+                    <FormGroup className="col-4 .col-md-4">
+                     <span >Sede</span>
+                     
+                     <Select
+                                    name="sede"
+                                    value={selectedOption.sede}
+                                    multi={true}
+                                    onChange={(values)=>this.handleChange(values,"sede")}
+                                    placeholder="Seleccionar Sede"
                                     removeSelected={true}
                                     rtl={false}
                                     simpleValue
-                                   options= {option}
-                                   valueKey='id_nombre'
-                                   labelKey='nombre'
-
+                                    options= {option2}
+                                    valueKey='id_sede'
+                                    labelKey='nombre_sede'
 
                                  />
 
-                            <list filtro ></list>
-                        </div>
-
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text" id="basic-addon1" >Sexo</span>
-                            </div>
-                            <FormGroup controlId="formControlsSelect">
-                                <Select
-                                    multi={true}
-                                    type="select"
-                                    name="sexo"
-                                    componentClass="select"
-                                multi    placeholder="Sexo"
-                                    onChange={this.handleChange}
-                                    options={[
-                                      { value: 'femenino', label: 'Femenino' },
-                                      { value: 'masculino', label: 'Masculino' },
-
-                                    ]}
-                                  >
-                                </Select>
-                            </FormGroup>
-                        </div>
-                    </Form>
-                </div>
-                <div className="container">
-                    <Form inline>
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon1">Sede</span>
-                                </div>
-                                < FormControl
-                                    name="sede"
-                                    type = " text "
-
-                                    onChange={this.handleInput}
-                                    placeholder = " Sede "
-                                />
-                            </div>
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon1">Facultad</span>
-                                </div>
-                                < FormControl
-                                    name="facultad"
-                                    type = " text "
-
-                                    onChange={this.handleInput}
-                                    placeholder = " Facultad "
-                                />
-                            </div>
-                            <div className="input-group mb-3">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text" id="basic-addon1">Escuela</span>
-                                </div>
-
-                                < FormControl
-                                    name="escuela"
-                                    type = " text "
-                                    onChange={this.handleInput}
-                                    placeholder = " Escuela "
-                                />
-                            </div>
-                    </Form>
-                </div>
-                  <div className="container">
-                    <form inline>
-                        <div className="input-group mb-3">
-                            <div className="input-group-prepend">
-                                <span className="input-group-text" id="basic-addon1">Periodo</span>
-                            </div>
-                            <FormGroup inline >
-                                <input name ="desde" type="date" className="form-control"   onChange={this.handleInput}/>
-                                <input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/>
-                            </FormGroup>
-                        </div>
-                        <div>
-                        <FormGroup>
+                </FormGroup>
+                <FormGroup className="col-4 .col-md-4">
+                    <span >Facultad</span>
+                        
                         <Select
-                               name="form-field-name"
-                                value={selectedOption}
-                                multi
-                                onChange={this.handleChange}
+                                    name="facultad"
+                                    value={selectedOption.facultad}
+                                    multi={true}
+                                    onChange={(values)=>this.handleChange(values,"facultad")}
+                                    placeholder="Seleccionar Facultad"
+                                    removeSelected={true}
+                                    rtl={false}
+                                    simpleValue
+                                    options= {option3}
+                                    valueKey='id_facultad'
+                                    labelKey='nombre_facultad'
 
-                                removeSelected={true}
-                                rtl={false}
-                                simpleValue
-                               options={[
-                                 { value: 'one', label: 'Onjohkho' },
-                                 { value: 'two', label: 'Two' },
-                                  { value: 'df', label: 'sd' },
-                                   { value: 'twsdfo', label: 'Tasdwo' },
-                                    { value: 'dfsf', label: 'rwea' },
+                                    />
 
-                               ]}
-                             />
+                    </FormGroup>
+                    <FormGroup className="col-4 .col-md-4">
+                        <span >Escuela</span>
+                       
+                        <Select
+                                    name="escuela"
+                                    value={selectedOption.escuela}
+                                    multi={true}
+                                    onChange={(values)=>this.handleChange(values,"escuela")}
+                                    placeholder="Seleccionar Escuela"
+                                    removeSelected={true}
+                                    col-8           rtl={false}
+                                    simpleValue
+                                    options= {option4}
+                                    valueKey='id_escuela'
+                                    labelKey='nombre_escuela'
 
-                        </FormGroup>
-                        </div>
-                    </form>
-                </div>
-                <div className="container">
-                    <Button  id="basic-addon1"
-                        type="submit"
-                      //  onClick={this.handleSearchClick}
-                    >Buscar</Button>
-                </div>
-            </div>
-            <div className={(this.state.isLoading)?("isLoading"):("listar")}>
-                {this.mostrarData()}
-            </div>
-        </div>
+                                    />
+
+                    </FormGroup>
+               </Row>
+                <Row>
+                <span  >Periodo</span>
+                    <FormGroup className="col-4 .col-md-4 ml-5" >                        
+                    <FormGroup className="col-4 row justify-content-center  " >
+                            
+                        <span className="ml-2" >Desde</span>
+                             <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
+                    </FormGroup>
+                    <FormGroup className="col-4 row justify-content-center" >
+                            
+                         <span className="ml-2" >Hasta</span>  
+                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>                   
+                    </FormGroup>
+                    </FormGroup>
+                    <FormGroup className=" col-sm-4">
+                            <span >Grado o Título</span>
+
+                            <Select
+                                        name="grado_titulo"
+                                        value={selectedOption.grado_titulo}
+                                        multi={false}
+                                        onChange={(values)=>this.handleChange(values,"grado_titulo")}
+                                        placeholder="Seleccionar grado/titulo"
+                                        removeSelected={true}
+                                        rtl={false}
+                                        simpleValue
+                                        options={[
+                                            { value: 'grado', label: 'Grado' },
+                                            { value: 'titulo', label: 'Titulo' },
+                                            ]}
+
+                                        
+
+
+                                        />
+
+                    </FormGroup>
+                </Row>
+                    
+                    
+              <Row className="right  ">
+                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Buscar</Button>                          
+              </Row>
+            </Form> 
+
+           </div>
+
+
+
+
+
+
+       </div>
     )
   }
 }

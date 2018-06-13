@@ -1,4 +1,21 @@
-data :[
+
+{
+  "nombre":[
+    {"id_nombre":1, "nombre":"debra"},
+    {"id_nombre":2, "nombre":"juan"},
+    {"id_nombre":3, "nombre":"lucas"},
+    {"id_nombre":4, "nombre":"julio"},
+    {"id_nombre":5, "nombre":"judas"}
+  ],  
+  "sexo":"",    
+  "desde":"",
+  "hasta":"",
+  "grado_titulo":"",
+
+
+
+
+
 "sede":[
   {
     "id_sede":1,
@@ -129,7 +146,7 @@ data :[
         },
         {
           "id_sede":2
-        },
+        }
     ],
 
     "facultad":[
@@ -163,7 +180,7 @@ data :[
             "sede":[
                 {
                   "id_sede":1
-                },
+                }
 
             ],
             "facultad":[
@@ -182,7 +199,7 @@ data :[
                     },
                     {
                       "id_sede":2
-                    },
+                    }
 
 
                 ],
@@ -197,4 +214,16 @@ data :[
 
 ],
 
+"selectedOption": [ 
+  "nombre":[],
+  "sexo":" ",
+  "sede":[],
+  "facultad":[],
+  "escuela":[],
+  "inicio":"" ,
+  "fin":"",
+  "grado_titulo":""
 ]
+
+
+}
