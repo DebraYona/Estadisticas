@@ -41,6 +41,12 @@ class Formulario extends Component{
         this.fetchData= this.fetchData.bind(this)
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
+        this.mapNombre=this.mapNombre.bind(this);
+        this.mapFacultad=this.mapFacultad.bind(this);
+        this.mapSede=this.mapSede.bind(this);
+        this.mapEscuela=this.mapEscuela.bind(this);
+
+
 
     }
 
@@ -115,11 +121,11 @@ class Formulario extends Component{
 
       }
       fetchData(){
-        axios.get('../../public/Data/data2.json')
+        axios.get('../../public/Data/data.json')
         .then(response =>{
            this.setState({
              datos: response.data.nombre
-        })
+        })  
         })
         .catch(error =>{
           console.log(error);
@@ -127,11 +133,13 @@ class Formulario extends Component{
         // this.setState( { data:prueba } )
 
     }
-    componentDidMount(){
-      axios.get('../Data/data2.json')
+
+
+    componentWillMount(){
+      axios.get('../Data/data.json')
       .then(response=>{
-        console.log(response.data.prueba);
-        this.setState({filtro: response.data.prueba})
+        console.log(response.data.facultad);
+        this.setState({filtro: response.data})
       })
       .catch(error =>{
         console.log(error);
@@ -202,21 +210,77 @@ class Formulario extends Component{
 
     }
 
+    mapNombre = mapitaNombre => {
+        let nombres = []
 
+        console.log(mapitaNombre)
+        if (mapitaNombre) {
+            nombres = mapitaNombre.map(n=>{
+                let nombrex = {}
+                nombrex['id'] = n.id_nombre
+                nombrex['nom'] = n.nombre
+                return nombrex
+            })
+        }
+        
+        return nombres
+    }
+    mapFacultad = mapitaFalcultad =>{
+        let facultad= []
+
+        if(mapitaFalcultad) {
+            facultad = mapitaFalcultad.map(n=> {
+                let facul ={}
+                facul['id_facultad']=n.id_facultad
+                facul['nombre_facultad']=n.nombre_facultad
+                return facul
+            })
+        }
+        
+        return facultad  
+        
+    }
+
+    mapSede = mapitaSede =>{
+        let sede= []
+
+        if(mapitaSede) {
+            sede = mapitaSede.map(n=> {
+                let sedes ={}
+                sedes['id_sede']=n.id_sede
+                sedes['nombre_sede']=n.nombre_sede
+                return sedes
+            })
+        }
+        
+        return sede  
+        
+    }
+    mapEscuela = mapitaEscuela =>{
+        let escuela= []
+
+        if(mapitaEscuela) {
+            escuela = mapitaEscuela.map(n=> {
+                let escuelas ={}
+                escuelas['id_escuela']=n.id_escuela
+                escuelas['nombre_escuela']=n.nombre_escuela
+                return escuelas
+            })
+        }
+        
+        return escuela  
+        
+    }
 
 
   render(){
-    console.log(this.state.filtro.nombre);
-    console.log(this.state.selectedOption)
+    console.log(this.state.filtro.sede);
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
-    const option=this.state.filtro.map((dato, i) =>{
-      dato.nombre
-    })
-    const option2=this.state.sede
-    const option3=this.state.facultad
-    const option4=this.state.escuela
-
+    const option=this.mapNombre(this.state.filtro.nombre)
+    const option2=this.mapSede(this.state.filtro.sede)
+    const option3=this.mapFacultad(this.state.filtro.facultad)
+    const option4=this.mapEscuela(this.state.filtro.escuela)
 
     return(
        <div className="formulario" >
@@ -236,8 +300,8 @@ class Formulario extends Component{
                                         rtl={false}
                                         simpleValue
                                         options= {option}
-                                        valueKey='id_nombre'
-                                        labelKey='nombre'
+                                        valueKey='id'
+                                        labelKey='nom'
                                         ref={node=>this.node}
 
                                         />

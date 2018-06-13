@@ -1,76 +1,204 @@
 {
-"prueba":[{
-    "codigo":"15200204",
-    "nombre":"debra",
-    "apepater":"chacaliaza",
-    "apemater":"Llamosa",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "de.chacaliaza@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  },
-  {
-    "codigo":"15200300",
-    "nombre":"julio",
-    "apepater":"cTello",
-    "apemater":"wok",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "lu.llano@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  },
-  {
-    "codigo":"15200300",
-    "nombre":"juan",
-    "apepater":"Llano",
-    "apemater":"Esta",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "lu.llano@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  },
-  {
-    "codigo":"15200300",
-    "nombre":"lucas",
-    "apepater":"",
-    "apemater":"Esta",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "lu.llano@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  },
-  {
-    "codigo":"15200300",
-    "nombre":"walter",
-    "apepater":"Banks",
-    "apemater":"Esta",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "lu.llano@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  },
-  {
-    "codigo":"15200300",
-    "nombre":"mario",
-    "apepater":"Hernan",
-    "apemater":"Esta",
-    "sede": "Lima",
-    "facultad":"Fis",
-    "escuela":"sis",
-    "correo": "lu.llano@gmail.com",
-    "telefono": "789523192",
-    "direccion": "por aqui y por alli"
-  }
+    "prueba":[{
+        "codigo":"15200204",
+        "nombre":"debradebradebradebradebra",
+        "apepater":"chacaliaza",
+        "apemater":"Llamosa",
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "de.chacaliaza@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli"
+        ,
+        "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200300",
+        "nombre":"julio",
+        "apepater":"cTello",
+        "apemater":"wok",
+        
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli"
+         ,
+         "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200300",
+        "nombre":"juan",
+        "apepater":"Llano",
+        "apemater":"Esta",
+       
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli"
+        ,
+        "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200320",
+        "nombre":"Maicol",
+        "apepater":"Lunario",
+        "apemater":"Esta",
+        
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli",
+        "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200300",
+        "nombre":"lucas",
+        "apepater":"",
+        "apemater":"Esta",
+        
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli",
+        "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200300",
+        "nombre":"walter",
+        "apepater":"Banks",
+        "apemater":"Esta",
+       
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli",
+        "gradotitulo": "phd"
+      },
+      {
+        "codigo":"15200300",
+        "nombre":"mario",
+        "apepater":"Hernan",
+        "apemater":"Esta",
+        
+        "facultad":"Fis",
+        "escuela": {
+          "id": 1,
+          "nombre": "Sistemas",
+          "facultad": 1
+      },
+      "sede": {
+          "id": 1,
+          "nombre": "Callao",
+          "escuelas": [
+              1,
+              2,
+              3,
+              4,
+              5
+          ]
+      },
+        "correo": "lu.llano@gmail.com",
+        "telefono": "789523192",
+        "direccion": "por aqui y por alli",
+        "gradotitulo": "phd"
+      }
+    
+    
 ],
 "columns":[
 
@@ -83,16 +211,7 @@
       "accessor": "nombre",
       "foldable": true
   },
-  {
-      "Header": "Apellido Paterno",
-      "accessor": "apepater",
-      "foldable": true
-  },
-  {
-      "Header": "Apellido Materno",
-      "accessor": "apemater",
-      "foldable": true
-  },
+  
 
   {
       "Header": "Sede",
@@ -120,8 +239,8 @@
       "foldable": true
   },
   {
-      "Header": "Direccion",
-      "accessor": "direccion",
+      "Header": "Grado o Titulo",
+      "accessor": "gradotitulo",
       "foldable": true
   }]
 

@@ -212,18 +212,9 @@
                 ]
     }
 
-],
-
-"selectedOption": [ 
-  "nombre":[],
-  "sexo":" ",
-  "sede":[],
-  "facultad":[],
-  "escuela":[],
-  "inicio":"" ,
-  "fin":"",
-  "grado_titulo":""
 ]
+
+
 
 
 }
