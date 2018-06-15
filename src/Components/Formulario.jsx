@@ -13,7 +13,7 @@ class Formulario extends Component{
         this.state = {
             selectedOption: {
               nombre:"",
-              sexo:" ",
+              sexo:"",
               sede:"",
               facultad:"",
               escuela:"",
@@ -22,6 +22,7 @@ class Formulario extends Component{
               grado_titulo:""
             },
             carrera :[],
+            grado :[],
             filtro:[]
 
         };
@@ -44,6 +45,8 @@ class Formulario extends Component{
         this.obtenerGrado=this.obtenerGrado.bind(this);
         this.filterByEscuela=this.filterByEscuela.bind(this);
         this.filterBySede=this.filterBySede.bind(this);
+
+        this.pedirExcel=this.pedirExcel.bind(this);
 
 
 
@@ -131,6 +134,17 @@ class Formulario extends Component{
         console.log(error);
       })
     }
+    fetchDataGrado(){
+        axios.get('http://35.185.243.106:3389/grado/')
+      .then(response=>{
+        this.setState({grado: response.data})
+        console.log(response.data);
+
+      })
+      .catch(error =>{
+        console.log(error);
+      })
+    }
 
 
     componentWillMount(){
@@ -146,8 +160,11 @@ class Formulario extends Component{
 
   }
 
-
-
+    pedirExcel=()=>{
+        let n =this.state.selectedOption
+        axios.post('http://172.16.2.107:8000/excel/',n)
+        .then(res=>  res)
+    }
     filtrar(e){
       var value = e.target.value
       var lista = this.state.filtro
@@ -383,7 +400,7 @@ class Formulario extends Component{
 
 
     mapSede = mapitaSede =>{
-        let sedex=this.obtenerSede(this.filterBySede(this.filterByEscuela(mapitaSede)))
+        let sedex=this.obtenerSede(this.filterByFacultad(this.filterByEscuela(mapitaSede)))
         let sede= []
 
         if(sedex) {
@@ -399,7 +416,7 @@ class Formulario extends Component{
 
     }
     mapEscuela = mapitaEscuela =>{
-        let escuelax =this.obtenerEscuela(this.filterBySede(this.filterByEscuela(mapitaEscuela)))
+        let escuelax =this.obtenerEscuela(this.filterBySede(this.filterByFacultad(mapitaEscuela)))
         let escuela= []
 
         if(escuelax) {
@@ -421,8 +438,8 @@ class Formulario extends Component{
         if(gradox) {
             grado = gradox.map(n=> {
                 let grados ={}
-                grados['id_escuela']=n.id
-                grados['nombre_escuela']=n.nombre
+                grados['id_grado']=n.id
+                grados['nombre_grado']=n.nombre
                 return grados
             })
         }
@@ -433,14 +450,14 @@ class Formulario extends Component{
 
 
   render(){
-    console.log(this.state.selectedOption.nombre)
+    console.log(this.state.selectedOption.inicio)
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.mapNombre(this.state.filtro.nombre)
     const option2=this.mapSede(this.state.carrera)
     const option3=this.mapFacultad(this.state.carrera)
     const option4=this.mapEscuela(this.state.carrera)
-    const option5=this.mapGrado(this.state.carrera)
+    const option5=this.mapGrado(this.state.grado)
 
     return(
        <div>
@@ -476,8 +493,8 @@ class Formulario extends Component{
                                         rtl={false}
                                         simpleValue
                                         options={[
-                                            { value: 'femenino', label: 'Femenino' },
-                                            { value: 'masculino', label: 'Masculino' },
+                                            { value: 'F', label: 'Femenino' },
+                                            { value: 'M', label: 'Masculino' },
                                             ]}
 
 
@@ -553,14 +570,16 @@ class Formulario extends Component{
                     <FormGroup className="col-4 row justify-content-center  " >
 
                         <span className="ml-2" >Desde</span>
-                             <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio} simpleValue  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
+                             <Col className="">< FormControl name ="inicio" type="date" className="form-control" value={selectedOption.inicio}   onChange={(values)=>this.handleChange(values.target.value,"inicio")}/></Col>
                     </FormGroup>
                     <FormGroup className="col-4 row justify-content-center" >
 
                          <span className="ml-2" >Hasta</span>
-                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
+                             <Col ><input name ="hasta" type="date" className="form-control" value={selectedOption.fin}  onChange={(values)=>this.handleChange(values.target.value,"fin")}/></Col>
                     </FormGroup>
                     </FormGroup>
+                    
+                    
                     <FormGroup className=" col-sm-4">
                             <span >Grado o Título</span>
 
@@ -585,7 +604,7 @@ class Formulario extends Component{
 
 
               <Row className="right  ">
-                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Imprimir</Button>
+                  <Button className="btn mr-10 "  id="basic-addon1" type="button"  onClick={this.pedirExcel} > Imprimir</Button>
               </Row>
             </Form>
 

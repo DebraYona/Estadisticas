@@ -53,20 +53,82 @@ class Tablas extends Component{
   }
 
   filterByEscuela =(lista) =>{
-      if(this.state.selectedOption.escuela.length>0)
+      if(this.state.selectedOption.escuela.length>0){
+        let n=this.state.selectedOption.escuela.split(',')
+        console.log(n);
           return lista.reduce((pv,cv)=>{
-              if(this.state.selectedOption.escuela.split(',').find(e=> e == (cv.escuela.id)))
-                  pv.push(cv)
-              return pv
-          }, [])
+              if(n.find(e=> e == (cv.estudios[0].carrera.escuela.id))){
+                pv.push(cv)}
+                return pv
+              
+                 
+          }, [])}
       else
           return lista
   }
+  filterByFacultad =(lista) =>{
+    if(this.state.selectedOption.facultad.length>0){
+      let n=this.state.selectedOption.facultad.split(',')
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+            if(n.find(e=> e == (cv.estudios[0].carrera.facultad.id))){
+              pv.push(cv)}
+              return pv
+            
+               
+        }, [])}
+    else
+        return lista
+}
+filterBySede =(lista) =>{
+    if(this.state.selectedOption.sede.length>0){
+      let n=this.state.selectedOption.sede.split(',')
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+            if(n.find(e=> e == (cv.estudios[0].carrera.sede.id))){
+              pv.push(cv)}
+              return pv
+            
+               
+        }, [])}
+    else
+        return lista
+}
+filterBySexo =(lista) =>{
+    if(this.state.selectedOption.sede.length>0){
+      let n=this.state.selectedOption.sexo.split('')
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+            if(n.find(e=> e == (cv.sexo))){
+              pv.push(cv)}
+              return pv
+            
+               
+        }, [])}
+    else
+        return lista
+}
+filterByinicio =(lista) =>{
+    if(this.state.selectedOption.sede.length>0){
+      let n=this.state.selectedOption.inicio.split('')
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+            if(n.find(e=> e >= (cv.inicio))){
+              pv.push(cv)}
+              return pv
+            
+               
+        }, [])}
+    else
+        return lista
+}
+
 
 
 
 mapDatos = mapitaDatos =>{
-  let dataz = this.filterByNombre(mapitaDatos)
+    let dataz = this.filterByinicio(mapitaDatos)
+    //let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(mapitaDatos)))))
   let data= []
   console.log(dataz);
   if(dataz) {
