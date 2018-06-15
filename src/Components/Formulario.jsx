@@ -12,7 +12,7 @@ class Formulario extends Component{
 
         this.state = {
             selectedOption: {
-              nombre:[],
+              nombre:"",
               sexo:" ",
               sede:"",
               facultad:"",
@@ -121,7 +121,7 @@ class Formulario extends Component{
 
       }
       fetchDataCarrera(){
-        axios.get('http://172.16.2.107:8000/carreras/')
+        axios.get('http://35.185.243.106:3389/carreras/')
       .then(response=>{
         this.setState({carrera: response.data})
         console.log(response.data);
@@ -135,7 +135,7 @@ class Formulario extends Component{
 
     componentWillMount(){
         this.fetchDataCarrera()
-        
+
       axios.get('../Data/data.json')
       .then(response=>{
         this.setState({filtro: response.data})
@@ -151,7 +151,7 @@ class Formulario extends Component{
     filtrar(e){
       var value = e.target.value
       var lista = this.state.filtro
-      console.log(lista)
+
       lista=  lista.filter(function(valueq){
        return valueq.toLowerCase().search(
         value.toLowerCase())  !== -1
@@ -175,28 +175,29 @@ class Formulario extends Component{
     filtrar2(e){
       var value = e.target.value
       var lista = this.state.filtro
-      console.log(lista)
+
       lista=  lista.filter(function(valueq){
        return valueq.nombre.toLowerCase().search(
         value.toLowerCase()) !== -1
 
      })
 
-     
+
     }
 
     filtrarNombre(e){
+
+
         var value = e.target.value
-        var lista = this.state.filtro.nombre
-        console.log(lista)
+        var lista = this.state.
         lista=  lista.filter(function(valueq){
          return valueq.nombre.search(
           value.toLowerCase()) !== -1
-  
+
        })
-  
-        
-  
+
+
+
       }
 
     handleChange = (values,n) => {
@@ -215,8 +216,8 @@ class Formulario extends Component{
      const [name, value] =e.target
       this.setState({
         [name]:value
-        
-        
+
+
       })
     }
       filtrar3(e){
@@ -226,9 +227,9 @@ class Formulario extends Component{
         lista=  lista.filter(function(valueq){
          return valueq.nombre.toLowerCase().search(
           value.toLowerCase()) !== -1
-  
+
        })
-      
+
 
     }
 
@@ -243,8 +244,8 @@ class Formulario extends Component{
         else
             return lista
     }
-       
-    
+
+
         filterBySede =(lista) =>{
             if(this.state.selectedOption.sede.length>0)
             return lista.reduce((pv,cv)=>{
@@ -256,7 +257,7 @@ class Formulario extends Component{
             return lista
 
         }
-        
+
         filterByFacultad =(lista) =>{
             if(this.state.selectedOption.facultad.length>0)
             return lista.reduce((pv,cv)=>{
@@ -268,7 +269,7 @@ class Formulario extends Component{
             return lista
 
         }
-        
+
 
 
 
@@ -279,64 +280,64 @@ class Formulario extends Component{
 
         if(FacultadTotal) {
             facultad = FacultadTotal.reduce((pv,cv,i,mapi)=>{
-                            
+
                 if (!pv.find(elementoActual=>elementoActual.id === cv.facultad.id)  )
                     pv.push(cv.facultad)
                 return pv
             }, [] )
-            
+
         }
-        
-        return facultad  
-        
+
+        return facultad
+
     }
     obtenerSede = mapitaSede =>{
         let sede= []
 
         if(mapitaSede) {
             sede = mapitaSede.reduce((pv,cv,i,mapi)=>{
-                             
+
                 if (!pv.find(elementoActual=>elementoActual.id === cv.sede.id))
                     pv.push(cv.sede)
                 return pv
             }, [] )
-            
+
         }
-        
-        return sede  
-        
+
+        return sede
+
     }
     obtenerEscuela = mapitaEscuela =>{
         let escuela= []
 
         if(mapitaEscuela) {
             escuela = mapitaEscuela.reduce((pv,cv,i,mapi)=>{
-                          
+
                 if (!pv.find(elementoActual=>elementoActual.id === cv.escuela.id))
                     pv.push(cv.escuela)
                 return pv
             }, [] )
-            
+
         }
-        
-        return escuela  
-        
+
+        return escuela
+
     }
     obtenerGrado = mapitaGrado =>{
         let grado= []
 
         if(mapitaGrado) {
             grado = mapitaGrado.reduce((pv,cv,i,mapi)=>{
-                          
+
                 if (!pv.find(elementoActual=>elementoActual.id === cv.grado.id))
                     pv.push(cv.grado)
                 return pv
             }, [] )
-            
+
         }
-        
-        return grado  
-        
+
+        return grado
+
     }
 
 
@@ -345,7 +346,7 @@ class Formulario extends Component{
     mapNombre = mapitaNombre => {
         let nombres = []
 
-        
+
         if (mapitaNombre) {
             nombres = mapitaNombre.map(n=>{
                 let nombrex = {}
@@ -354,10 +355,10 @@ class Formulario extends Component{
                 return nombrex
             })
         }
-        
+
         return nombres
     }
-    
+
 
 
 
@@ -371,18 +372,18 @@ class Formulario extends Component{
                 facul['id_facultad']=n.id
                 facul['nombre_facultad']=n.nombre_corto
                 return facul
-            
+
             })
         }
-        
-        return facultad  
-        
+
+        return facultad
+
     }
 
 
 
     mapSede = mapitaSede =>{
-        let sedex=this.obtenerSede(mapitaSede)
+        let sedex=this.obtenerSede(this.filterBySede(this.filterByEscuela(mapitaSede)))
         let sede= []
 
         if(sedex) {
@@ -393,12 +394,12 @@ class Formulario extends Component{
                 return sedes
             })
         }
-        
-        return sede  
-        
+
+        return sede
+
     }
     mapEscuela = mapitaEscuela =>{
-        let escuelax =this.obtenerEscuela(mapitaEscuela)
+        let escuelax =this.obtenerEscuela(this.filterBySede(this.filterByEscuela(mapitaEscuela)))
         let escuela= []
 
         if(escuelax) {
@@ -409,9 +410,9 @@ class Formulario extends Component{
                 return escuelas
             })
         }
-        
-        return escuela  
-        
+
+        return escuela
+
     }
     mapGrado = mapitaGrado =>{
         let gradox =this.obtenerEscuela(mapitaGrado)
@@ -425,14 +426,14 @@ class Formulario extends Component{
                 return grados
             })
         }
-        
-        return grado  
-        
+
+        return grado
+
     }
 
 
   render(){
-    console.log(this.state.selectedOption.sede)
+    console.log(this.state.selectedOption.nombre)
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.mapNombre(this.state.filtro.nombre)
@@ -442,24 +443,25 @@ class Formulario extends Component{
     const option5=this.mapGrado(this.state.carrera)
 
     return(
+       <div>
        <div className="formulario" >
            <div className="contiener" >
             <Form  >
                 <Row >
                     <FormGroup  className=" col-sm-8" inline>
-                        
+
                             <span >Nombre o Apellido</span>
-                            <FormControl 
+                            <FormControl
                                 name="nombre"
-                                type="text" 
-                                placeholder="Nombre" 
-                                onChange={this.filtrarNombre}
-                                option={[option]}                                                                                                              
-                                                            
+                                type="text"
+                                placeholder="Nombre"
+                                onChange={(values)=>this.handleChange(values.target.value,"nombre")}
+                                option={[option]}
+
                                         />
                             <ListGroup/>
-                                   
-                            
+
+
                     </FormGroup>
                     <FormGroup className=" col-sm-4">
                             <span >Sexo</span>
@@ -571,10 +573,7 @@ class Formulario extends Component{
                                         removeSelected={true}
                                         rtl={false}
                                         simpleValue
-                                        options={[
-                                            { value: 'grado', label: 'Grado' },
-                                            { value: 'titulo', label: 'Titulo' },
-                                            ]}
+                                        options={[option5]}
 
 
 
@@ -594,10 +593,12 @@ class Formulario extends Component{
 
 
 
-              {console.log(selectedOption.nombre)}                                
+
 
 
        </div>
+             <Tablas data={this.state.selectedOption} />
+      </div>
     )
   }
 }
