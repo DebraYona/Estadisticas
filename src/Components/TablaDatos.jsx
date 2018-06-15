@@ -95,7 +95,7 @@ filterBySede =(lista) =>{
         return lista
 }
 filterBySexo =(lista) =>{
-    if(this.state.selectedOption.sede.length>0){
+    if(this.state.selectedOption.sexo){
       let n=this.state.selectedOption.sexo.split('')
       console.log(n);
         return lista.reduce((pv,cv)=>{
@@ -109,11 +109,12 @@ filterBySexo =(lista) =>{
         return lista
 }
 filterByinicio =(lista) =>{
-    if(this.state.selectedOption.sede.length>0){
-      let n=this.state.selectedOption.inicio.split('')
+    if(this.state.selectedOption.inicio.length>0){
+      let n=this.state.selectedOption.inicio
       console.log(n);
         return lista.reduce((pv,cv)=>{
-            if(n.find(e=> e >= (cv.inicio))){
+            if(n <= (cv.estudios[0].fecha_diploma)){
+              console.log(cv.estudios[0].fecha_diploma)
               pv.push(cv)}
               return pv
             
@@ -123,12 +124,30 @@ filterByinicio =(lista) =>{
         return lista
 }
 
+filterByfinal=(lista) =>{
+    
+     if(this.state.selectedOption.fin.length>0){
+      let n=this.state.selectedOption.fin
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+            if(n >= (cv.estudios[0].fecha_diploma)){
+              console.log(cv.estudios[0].fecha_diploma)
+              pv.push(cv)}
+              return pv
+            
+               
+        }, [])}
+    else
+        return lista
+    
+}
+
 
 
 
 mapDatos = mapitaDatos =>{
-    let dataz = this.filterByinicio(mapitaDatos)
-    //let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(mapitaDatos)))))
+    //let dataz = this.filterByfinal(mapitaDatos)  
+    let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
   let data= []
   console.log(dataz);
   if(dataz) {

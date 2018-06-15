@@ -31,6 +31,8 @@ class Formulario extends Component{
         this.filtrar = this.filtrar.bind(this)
         this.filtrar2 = this.filtrar2.bind(this)
         this.fetchDataCarrera= this.fetchDataCarrera.bind(this)
+        this.fetchDataGrado= this.fetchDataGrado.bind(this)
+
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
         this.mapNombre=this.mapNombre.bind(this);
@@ -135,7 +137,7 @@ class Formulario extends Component{
       })
     }
     fetchDataGrado(){
-        axios.get('http://35.185.243.106:3389/grado/')
+        axios.get('http://35.185.243.106:3389/grados/')
       .then(response=>{
         this.setState({grado: response.data})
         console.log(response.data);
@@ -149,6 +151,7 @@ class Formulario extends Component{
 
     componentWillMount(){
         this.fetchDataCarrera()
+        this.fetchDataGrado()
 
       axios.get('../Data/data.json')
       .then(response=>{
@@ -162,9 +165,24 @@ class Formulario extends Component{
 
     pedirExcel=()=>{
         let n =this.state.selectedOption
-        axios.post('http://172.16.2.107:8000/excel/',n)
-        .then(res=>  res)
+        axios({
+            url:'http://172.16.2.107:8000/excel/',
+            method:'POST',
+            responseType:'blob',
+            data:n 
+        })
+        .then(response=>{
+            const url=window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href=url
+            link.setAttribute('download','registro.xlsx')
+            link.click()
+            window.URL.revokeObjectURL(url)
+        })
     }
+
+
+
     filtrar(e){
       var value = e.target.value
       var lista = this.state.filtro
@@ -346,7 +364,7 @@ class Formulario extends Component{
         if(mapitaGrado) {
             grado = mapitaGrado.reduce((pv,cv,i,mapi)=>{
 
-                if (!pv.find(elementoActual=>elementoActual.id === cv.grado.id))
+                if (!pv.find(elementoActual=>elementoActual.id === cv.id))
                     pv.push(cv.grado)
                 return pv
             }, [] )
@@ -432,7 +450,7 @@ class Formulario extends Component{
 
     }
     mapGrado = mapitaGrado =>{
-        let gradox =this.obtenerEscuela(mapitaGrado)
+        let gradox =this.obtenerGrado(mapitaGrado)
         let grado= []
 
         if(gradox) {
