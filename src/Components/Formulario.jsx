@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tablas from './TablaDatos';
-import {Col, Row, Label,Button, Form, FormGroup, FormControl} from 'react-bootstrap';
+import {Col, Row, Label,Button, Form, FormGroup, ListGroup, FormControl} from 'react-bootstrap';
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -14,23 +14,14 @@ class Formulario extends Component{
             selectedOption: {
               nombre:[],
               sexo:" ",
-              sede:[],
-              facultad:[],
-              escuela:[],
+              sede:"",
+              facultad:"",
+              escuela:"",
               inicio:"" ,
               fin:"",
               grado_titulo:""
             },
-            datos :{
-              nombre:[],
-              sexo:" ",
-              sede:[],
-              facultad:[],
-              escuela:[],
-              inicio:"" ,
-              fin:"",
-              grado_titulo:""
-            },
+            carrera :[],
             filtro:[]
 
         };
@@ -38,13 +29,22 @@ class Formulario extends Component{
         this.handleInput = this.handleInput.bind(this)
         this.filtrar = this.filtrar.bind(this)
         this.filtrar2 = this.filtrar2.bind(this)
-        this.fetchData= this.fetchData.bind(this)
+        this.fetchDataCarrera= this.fetchDataCarrera.bind(this)
         //this.handleSearchKey=this.handleSearchKey.bind((this));
         this.mostrarData=this.mostrarData.bind(this);
         this.mapNombre=this.mapNombre.bind(this);
         this.mapFacultad=this.mapFacultad.bind(this);
         this.mapSede=this.mapSede.bind(this);
         this.mapEscuela=this.mapEscuela.bind(this);
+
+        this.filtrarNombre=this.filtrarNombre.bind(this);
+        this.obtenerFacultad=this.obtenerFacultad.bind(this);
+        this.obtenerEscuela=this.obtenerEscuela.bind(this);
+        this.obtenerSede=this.obtenerSede.bind(this);
+        this.obtenerGrado=this.obtenerGrado.bind(this);
+        this.filterByEscuela=this.filterByEscuela.bind(this);
+        this.filterBySede=this.filterBySede.bind(this);
+
 
 
 
@@ -120,25 +120,24 @@ class Formulario extends Component{
         return contenedor;
 
       }
-      fetchData(){
-        axios.get('../../public/Data/data.json')
-        .then(response =>{
-           this.setState({
-             datos: response.data.nombre
-        })  
-        })
-        .catch(error =>{
-          console.log(error);
-        })
-        // this.setState( { data:prueba } )
+      fetchDataCarrera(){
+        axios.get('http://172.16.2.107:8000/carreras/')
+      .then(response=>{
+        this.setState({carrera: response.data})
+        console.log(response.data);
 
+      })
+      .catch(error =>{
+        console.log(error);
+      })
     }
 
 
     componentWillMount(){
+        this.fetchDataCarrera()
+        
       axios.get('../Data/data.json')
       .then(response=>{
-        console.log(response.data.facultad);
         this.setState({filtro: response.data})
       })
       .catch(error =>{
@@ -151,7 +150,7 @@ class Formulario extends Component{
 
     filtrar(e){
       var value = e.target.value
-      var lista = this.state.nombre
+      var lista = this.state.filtro
       console.log(lista)
       lista=  lista.filter(function(valueq){
        return valueq.toLowerCase().search(
@@ -175,17 +174,31 @@ class Formulario extends Component{
 
     filtrar2(e){
       var value = e.target.value
-      var lista = this.state.facultad
+      var lista = this.state.filtro
       console.log(lista)
       lista=  lista.filter(function(valueq){
-       return valueq.nombre_facultad.toLowerCase().search(
+       return valueq.nombre.toLowerCase().search(
         value.toLowerCase()) !== -1
 
      })
 
-      console.log(lista);
-
+     
     }
+
+    filtrarNombre(e){
+        var value = e.target.value
+        var lista = this.state.filtro.nombre
+        console.log(lista)
+        lista=  lista.filter(function(valueq){
+         return valueq.nombre.search(
+          value.toLowerCase()) !== -1
+  
+       })
+  
+        
+  
+      }
+
     handleChange = (values,n) => {
       console.log(this.state.selectedOption[n])
      this.setState(prevState=>{
@@ -199,21 +212,140 @@ class Formulario extends Component{
 
     handleInput(e) {
 
-      const {value, name} = e.target.selectedOption
+     const [name, value] =e.target
       this.setState({
         [name]:value
-
+        
+        
       })
-      console.log(this.state);
-      console.log(e.target.name);
-
+    }
+      filtrar3(e){
+        var value = e.target.value
+        var lista = this.state.filtro
+        console.log(lista)
+        lista=  lista.filter(function(valueq){
+         return valueq.nombre.toLowerCase().search(
+          value.toLowerCase()) !== -1
+  
+       })
+      
 
     }
 
+    /*filtros*/
+    filterByEscuela =(lista) =>{
+        if(this.state.selectedOption.escuela.length>0)
+            return lista.reduce((pv,cv)=>{
+                if(this.state.selectedOption.escuela.split(',').find(e=> e == (cv.escuela.id)))
+                    pv.push(cv)
+                return pv
+            }, [])
+        else
+            return lista
+    }
+       
+    
+        filterBySede =(lista) =>{
+            if(this.state.selectedOption.sede.length>0)
+            return lista.reduce((pv,cv)=>{
+                if(this.state.selectedOption.sede.split(',').find(e=> e == (cv.sede.id)))
+                    pv.push(cv)
+                return pv
+            }, [])
+            else
+            return lista
+
+        }
+        
+        filterByFacultad =(lista) =>{
+            if(this.state.selectedOption.facultad.length>0)
+            return lista.reduce((pv,cv)=>{
+                if(this.state.selectedOption.facultad.split(',').find(e=> e == (cv.facultad.id)))
+                    pv.push(cv)
+                return pv
+            }, [])
+            else
+            return lista
+
+        }
+        
+
+
+
+    /* obtener*/
+
+    obtenerFacultad = FacultadTotal =>{
+        let facultad= []
+
+        if(FacultadTotal) {
+            facultad = FacultadTotal.reduce((pv,cv,i,mapi)=>{
+                            
+                if (!pv.find(elementoActual=>elementoActual.id === cv.facultad.id)  )
+                    pv.push(cv.facultad)
+                return pv
+            }, [] )
+            
+        }
+        
+        return facultad  
+        
+    }
+    obtenerSede = mapitaSede =>{
+        let sede= []
+
+        if(mapitaSede) {
+            sede = mapitaSede.reduce((pv,cv,i,mapi)=>{
+                             
+                if (!pv.find(elementoActual=>elementoActual.id === cv.sede.id))
+                    pv.push(cv.sede)
+                return pv
+            }, [] )
+            
+        }
+        
+        return sede  
+        
+    }
+    obtenerEscuela = mapitaEscuela =>{
+        let escuela= []
+
+        if(mapitaEscuela) {
+            escuela = mapitaEscuela.reduce((pv,cv,i,mapi)=>{
+                          
+                if (!pv.find(elementoActual=>elementoActual.id === cv.escuela.id))
+                    pv.push(cv.escuela)
+                return pv
+            }, [] )
+            
+        }
+        
+        return escuela  
+        
+    }
+    obtenerGrado = mapitaGrado =>{
+        let grado= []
+
+        if(mapitaGrado) {
+            grado = mapitaGrado.reduce((pv,cv,i,mapi)=>{
+                          
+                if (!pv.find(elementoActual=>elementoActual.id === cv.grado.id))
+                    pv.push(cv.grado)
+                return pv
+            }, [] )
+            
+        }
+        
+        return grado  
+        
+    }
+
+
+
+    /*map */
     mapNombre = mapitaNombre => {
         let nombres = []
 
-        console.log(mapitaNombre)
+        
         if (mapitaNombre) {
             nombres = mapitaNombre.map(n=>{
                 let nombrex = {}
@@ -225,15 +357,21 @@ class Formulario extends Component{
         
         return nombres
     }
-    mapFacultad = mapitaFalcultad =>{
-        let facultad= []
+    
 
-        if(mapitaFalcultad) {
-            facultad = mapitaFalcultad.map(n=> {
+
+
+    mapFacultad = mapitaFacultad =>{
+        let facultadx=this.obtenerFacultad(this.filterBySede(this.filterByEscuela(mapitaFacultad)))
+
+        let facultad=[]
+        if(facultadx) {
+            facultad = facultadx.map(n=> {
                 let facul ={}
-                facul['id_facultad']=n.id_facultad
-                facul['nombre_facultad']=n.nombre_facultad
+                facul['id_facultad']=n.id
+                facul['nombre_facultad']=n.nombre_corto
                 return facul
+            
             })
         }
         
@@ -241,14 +379,17 @@ class Formulario extends Component{
         
     }
 
+
+
     mapSede = mapitaSede =>{
+        let sedex=this.obtenerSede(mapitaSede)
         let sede= []
 
-        if(mapitaSede) {
-            sede = mapitaSede.map(n=> {
+        if(sedex) {
+            sede = sedex.map(n=> {
                 let sedes ={}
-                sedes['id_sede']=n.id_sede
-                sedes['nombre_sede']=n.nombre_sede
+                sedes['id_sede']=n.id
+                sedes['nombre_sede']=n.nombre
                 return sedes
             })
         }
@@ -257,13 +398,14 @@ class Formulario extends Component{
         
     }
     mapEscuela = mapitaEscuela =>{
+        let escuelax =this.obtenerEscuela(mapitaEscuela)
         let escuela= []
 
-        if(mapitaEscuela) {
-            escuela = mapitaEscuela.map(n=> {
+        if(escuelax) {
+            escuela = escuelax.map(n=> {
                 let escuelas ={}
-                escuelas['id_escuela']=n.id_escuela
-                escuelas['nombre_escuela']=n.nombre_escuela
+                escuelas['id_escuela']=n.id
+                escuelas['nombre_escuela']=n.nombre
                 return escuelas
             })
         }
@@ -271,16 +413,33 @@ class Formulario extends Component{
         return escuela  
         
     }
+    mapGrado = mapitaGrado =>{
+        let gradox =this.obtenerEscuela(mapitaGrado)
+        let grado= []
+
+        if(gradox) {
+            grado = gradox.map(n=> {
+                let grados ={}
+                grados['id_escuela']=n.id
+                grados['nombre_escuela']=n.nombre
+                return grados
+            })
+        }
+        
+        return grado  
+        
+    }
 
 
   render(){
-    console.log(this.state.filtro.sede);
+    console.log(this.state.selectedOption.sede)
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.mapNombre(this.state.filtro.nombre)
-    const option2=this.mapSede(this.state.filtro.sede)
-    const option3=this.mapFacultad(this.state.filtro.facultad)
-    const option4=this.mapEscuela(this.state.filtro.escuela)
+    const option2=this.mapSede(this.state.carrera)
+    const option3=this.mapFacultad(this.state.carrera)
+    const option4=this.mapEscuela(this.state.carrera)
+    const option5=this.mapGrado(this.state.carrera)
 
     return(
        <div className="formulario" >
@@ -288,24 +447,19 @@ class Formulario extends Component{
             <Form  >
                 <Row >
                     <FormGroup  className=" col-sm-8" inline>
-
+                        
                             <span >Nombre o Apellido</span>
-                            <Select
-                                        name="nombre"
-                                        value={selectedOption.nombre}
-                                        multi
-                                        onChange={(values)=>this.handleChange(values,"nombre")}
-                                        placeholder="Nombre"
-                                        removeSelected={true}
-                                        rtl={false}
-                                        simpleValue
-                                        options= {option}
-                                        valueKey='id'
-                                        labelKey='nom'
-                                        ref={node=>this.node}
-
+                            <FormControl 
+                                name="nombre"
+                                type="text" 
+                                placeholder="Nombre" 
+                                onChange={this.filtrarNombre}
+                                option={[option]}                                                                                                              
+                                                            
                                         />
-
+                            <ListGroup/>
+                                   
+                            
                     </FormGroup>
                     <FormGroup className=" col-sm-4">
                             <span >Sexo</span>
@@ -397,12 +551,12 @@ class Formulario extends Component{
                     <FormGroup className="col-4 row justify-content-center  " >
 
                         <span className="ml-2" >Desde</span>
-                             <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio}  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
+                             <Col className="">< input name ="inicio" type="date" className="form-control" value={selectedOption.inicio} simpleValue  onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
                     </FormGroup>
                     <FormGroup className="col-4 row justify-content-center" >
 
                          <span className="ml-2" >Hasta</span>
-                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={this.handleInput}/></Col>
+                             <Col ><input name ="hasta" type="date" className="form-control"   onChange={(values)=>this.handleChange(values,"inicio")}/></Col>
                     </FormGroup>
                     </FormGroup>
                     <FormGroup className=" col-sm-4">
@@ -432,7 +586,7 @@ class Formulario extends Component{
 
 
               <Row className="right  ">
-                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Buscar</Button>
+                  <Button className="btn mr-10 "  id="basic-addon1" type="submit"> Imprimir</Button>
               </Row>
             </Form>
 
@@ -440,7 +594,7 @@ class Formulario extends Component{
 
 
 
-
+              {console.log(selectedOption.nombre)}                                
 
 
        </div>

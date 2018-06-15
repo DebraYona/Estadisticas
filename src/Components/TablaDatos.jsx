@@ -23,10 +23,11 @@ class Tablas extends Component{
   
   componentWillMount(){
     
-    axios.get('../Data/data2.json')
+    axios.get('http://172.16.2.107:8000/alumnos/')
     .then(response=>{
      
-      this.setState({datos: response.data.prueba})
+      this.setState({datos: response.data})
+      
     })
     .catch(error =>{
       console.log(error);
@@ -40,16 +41,16 @@ mapDatos = mapitaDatos =>{
       data = mapitaDatos.map(n=> {
           let datax ={}
           datax['codigo']=n.codigo
-          datax['nombre']=n.nombre
-          datax['sede']=n.sede.nombre
-          datax['facultad']=n.facultad
-          datax['escuela']=n.escuela.nombre
-          datax['correo']=n.codigo
-          datax['telefono']=n.telefono
+          datax['nombre']=n.nombres
+          datax['sede']=n.estudios[0].carrera.sede.nombre
+          datax['facultad']=n.estudios[0].carrera.facultad.nombre_corto
+          datax['escuela']=n.estudios[0].carrera.escuela.nombre_corto
+          datax['correo']=n.mail
+          datax['telefono']=n.n_telefono
           datax['direccion']=n.direccion
-          datax['gradotitulo']=n.gradotitulo
+          datax['gradotitulo']=n.estudios[0].gradotitulo.nombre
 
-
+          
           return datax
       })
   }
@@ -64,7 +65,7 @@ mapDatos = mapitaDatos =>{
 
 
       const data2 =this.mapDatos(this.state.datos)
-      console.log(data2)
+      
       const columns2=columns
 
 
