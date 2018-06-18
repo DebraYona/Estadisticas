@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  padding: 150px;
+  padding: 20px;
   font-family: sans-serif;
-  background: #E0FFFF;
+  background: rgba(219, 216, 216, 0);
+  line-height: 1.7;
 }

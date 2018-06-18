@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tablas from './TablaDatos';
-import {Col, Row, Label,Button, Form, FormGroup, ListGroup, FormControl} from 'react-bootstrap';
+import {Col, Row, Label,Button, Form, FormGroup, ListGroup, FormControl, Grid} from 'react-bootstrap';
 import './index.css';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -19,7 +19,7 @@ class Formulario extends Component{
               escuela:"",
               inicio:"" ,
               fin:"",
-              grado_titulo:""
+              grado_titulo:null,
             },
             carrer :[],
             grado :[],
@@ -57,60 +57,6 @@ class Formulario extends Component{
 
 
 
-    handleSearchClick(){
-        //let url = '';
-        if(this.state.nombre_apellido === "" && this.state.sexo === ""&& this.state.sede === "" &&
-            this.state.dates2 === "" && this.state.dates === "" && this.state.facultad === "") {
-            this.setState({
-                mensaje: "Casilleros vacios",
-                estado: true,
-                operacion: 'V',
-                lista: [],
-                isLoading: false
-            });
-        }else{
-            //parametros a enviar al json
-            let jsonString = {
-                "nombre": this.state.nombre_apellido,
-                "sexo": this.state.sexo,
-                "sede": this.state.sede,
-                "facultad": this.state.facultad,
-                "escuela": this.state.escuela,
-                "periodoI": this.state.dates,
-                "periodoF": this.state.dates2,
-            };
-            this.setState({
-                isLoading:true,
-                mensaje:"",
-                operacion:"c"
-            });
-            console.log(jsonString);
-            /*
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(jsonString, null, 2)
-
-            })
-                .then((response) => {
-                    return response.json()
-                })
-                .then(responseJson => {
-                    this.setState({
-                        lista: responseJson.data,
-                        estado:true,
-                        operacion: (responseJson.data!==null && responseJson.data.length!==0),
-                        mensaje:(responseJson.data!==null && responseJson.data.length!==0)?(""):("Datos no encontrados"),
-                        isLoading:false
-                    });
-                    //console.log( responseJson.data.length);
-                });
-                */
-        }
-    }
     mostrarData(){
         let contenedor="";
         if(this.state.estado){
@@ -168,7 +114,7 @@ class Formulario extends Component{
     pedirExcel=()=>{
         let n =this.state.selectedOption
         axios({
-            url:'http://172.16.2.107/excel/',
+            url:'http://172.16.2.107:8000/excel/',
             method:'POST',
             responseType:'blob',
             data:n
@@ -487,7 +433,7 @@ class Formulario extends Component{
                 <Row >
                     <FormGroup  className=" col-sm-8" inline>
 
-                            <span >Nombre o Apellido</span>
+                            <span className="tilulo" >Nombre o Apellido</span>
                             <FormControl
                                 name="nombre"
                                 type="text"
@@ -501,7 +447,7 @@ class Formulario extends Component{
 
                     </FormGroup>
                     <FormGroup className=" col-sm-4">
-                            <span >Sexo</span>
+                            <span className="tilulo" >Sexo</span>
 
                             <Select
                                         name="sexo"
@@ -527,7 +473,7 @@ class Formulario extends Component{
                </Row>
                <Row>
                     <FormGroup className="col-4 .col-md-4">
-                     <span >Sede</span>
+                     <span className="tilulo"  >Sede</span>
 
                      <Select
                                     name="sede"
@@ -546,7 +492,7 @@ class Formulario extends Component{
 
                 </FormGroup>
                 <FormGroup className="col-4 .col-md-4">
-                    <span >Facultad</span>
+                    <span className="tilulo" >Facultad</span>
 
                         <Select
                                     name="facultad"
@@ -565,7 +511,7 @@ class Formulario extends Component{
 
                     </FormGroup>
                     <FormGroup className="col-4 .col-md-4">
-                        <span >Escuela</span>
+                        <span className="tilulo"  >Escuela</span>
 
                         <Select
                                     name="escuela"
@@ -585,7 +531,7 @@ class Formulario extends Component{
                     </FormGroup>
                </Row>
                 <Row>
-                <span  >Periodo</span>
+                <span className="tilulo" >Periodo</span>
                     <FormGroup className="col-4 .col-md-4 ml-5" >
                     <FormGroup className="col-4 row justify-content-center  " >
 
@@ -601,7 +547,7 @@ class Formulario extends Component{
 
 
                     <FormGroup className=" col-sm-4">
-                            <span >Grado o Título</span>
+                            <span className="tilulo" >Grado o Título</span>
 
                             <Select
                                         name="grado_titulo"
@@ -623,10 +569,27 @@ class Formulario extends Component{
                     </FormGroup>
                 </Row>
 
+                <Grid>
 
-              <Row className="right  ">
-                  <Button className="btn mr-10 "  id="basic-addon1" type="button"  onClick={this.pedirExcel} > Imprimir</Button>
-              </Row>
+               <Row className="show-grid">
+                    <Col xs={6} md={4}>
+                    
+                    </Col>
+                    <Col xs={6} md={4}>
+                    
+                    </Col>
+                    <Col xsHidden md={4}>
+                    <Button className=""  id="basic-addon1" type="button"  onClick={this.pedirExcel} > Imprimir</Button>
+                    </Col>
+                </Row>
+
+                
+
+
+                
+                </Grid>
+
+              
             </Form>
 
            </div>

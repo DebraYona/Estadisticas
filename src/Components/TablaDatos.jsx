@@ -43,7 +43,7 @@ class Tablas extends Component{
       console.log(n);
           return lista.reduce((pv,cv)=>{
 
-              if(n.reduce((p,c )=> p || cv.nombres.search(c)!==-1, false)){
+              if(n.reduce((p,c )=> p || cv.nombres.toLowerCase().search(c.toLowerCase())!==-1, false)){
                   console.log("entra")
                   pv.push(cv)}
               return pv
@@ -146,8 +146,8 @@ filterByfinal=(lista) =>{
 
 
 mapDatos = mapitaDatos =>{
-    //let dataz = this.filterByfinal(mapitaDatos)
-    let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
+    let dataz = this.filterByNombre(mapitaDatos)
+    //let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
   let data= []
   console.log(dataz);
   if(dataz) {
