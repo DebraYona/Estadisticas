@@ -21,7 +21,7 @@ class Formulario extends Component{
               fin:"",
               grado_titulo:""
             },
-            carrera :[],
+            carrer :[],
             grado :[],
             filtro:[]
 
@@ -126,7 +126,7 @@ class Formulario extends Component{
 
       }
       fetchDataCarrera(){
-        axios.get('http://35.185.243.106:3389/carreras/')
+        axios.get('http://35.185.243.106/carreras/')
       .then(response=>{
         this.setState({carrera: response.data})
         console.log(response.data);
@@ -137,10 +137,11 @@ class Formulario extends Component{
       })
     }
     fetchDataGrado(){
-        axios.get('http://35.185.243.106:3389/grados/')
+        axios.get('http://35.185.243.106/grados/')
       .then(response=>{
+          console.log(response.data);
         this.setState({grado: response.data})
-        console.log(response.data);
+
 
       })
       .catch(error =>{
@@ -161,15 +162,16 @@ class Formulario extends Component{
         console.log(error);
       })
 
+
   }
 
     pedirExcel=()=>{
         let n =this.state.selectedOption
         axios({
-            url:'http://172.16.2.107:8000/excel/',
+            url:'http://172.16.2.107/excel/',
             method:'POST',
             responseType:'blob',
-            data:n 
+            data:n
         })
         .then(response=>{
             const url=window.URL.createObjectURL(new Blob([response.data]))
@@ -450,7 +452,7 @@ class Formulario extends Component{
 
     }
     mapGrado = mapitaGrado =>{
-        let gradox =this.obtenerGrado(mapitaGrado)
+        let gradox =mapitaGrado
         let grado= []
 
         if(gradox) {
@@ -468,7 +470,7 @@ class Formulario extends Component{
 
 
   render(){
-    console.log(this.state.selectedOption.inicio)
+    console.log(this.state.grado)
     const { selectedOption } = this.state;
   	const value = selectedOption && selectedOption.value;
     const option=this.mapNombre(this.state.filtro.nombre)
@@ -596,8 +598,8 @@ class Formulario extends Component{
                              <Col ><input name ="hasta" type="date" className="form-control" value={selectedOption.fin}  onChange={(values)=>this.handleChange(values.target.value,"fin")}/></Col>
                     </FormGroup>
                     </FormGroup>
-                    
-                    
+
+
                     <FormGroup className=" col-sm-4">
                             <span >Grado o Título</span>
 
@@ -610,8 +612,9 @@ class Formulario extends Component{
                                         removeSelected={true}
                                         rtl={false}
                                         simpleValue
-                                        options={[option5]}
-
+                                        options={option5}
+                                        valueKey='id_grado'
+                                        labelKey='nombre_grado'
 
 
 

@@ -24,7 +24,7 @@ class Tablas extends Component{
 
   componentWillMount(){
 
-    axios.get('http://35.185.243.106:3389/alumnos/')
+    axios.get('http://35.185.243.106/alumnos/')
     .then(response=>{
 
       this.setState({datos: response.data})
@@ -60,8 +60,8 @@ class Tablas extends Component{
               if(n.find(e=> e == (cv.estudios[0].carrera.escuela.id))){
                 pv.push(cv)}
                 return pv
-              
-                 
+
+
           }, [])}
       else
           return lista
@@ -74,8 +74,8 @@ class Tablas extends Component{
             if(n.find(e=> e == (cv.estudios[0].carrera.facultad.id))){
               pv.push(cv)}
               return pv
-            
-               
+
+
         }, [])}
     else
         return lista
@@ -88,8 +88,8 @@ filterBySede =(lista) =>{
             if(n.find(e=> e == (cv.estudios[0].carrera.sede.id))){
               pv.push(cv)}
               return pv
-            
-               
+
+
         }, [])}
     else
         return lista
@@ -102,8 +102,8 @@ filterBySexo =(lista) =>{
             if(n.find(e=> e == (cv.sexo))){
               pv.push(cv)}
               return pv
-            
-               
+
+
         }, [])}
     else
         return lista
@@ -117,15 +117,15 @@ filterByinicio =(lista) =>{
               console.log(cv.estudios[0].fecha_diploma)
               pv.push(cv)}
               return pv
-            
-               
+
+
         }, [])}
     else
         return lista
 }
 
 filterByfinal=(lista) =>{
-    
+
      if(this.state.selectedOption.fin.length>0){
       let n=this.state.selectedOption.fin
       console.log(n);
@@ -134,19 +134,19 @@ filterByfinal=(lista) =>{
               console.log(cv.estudios[0].fecha_diploma)
               pv.push(cv)}
               return pv
-            
-               
+
+
         }, [])}
     else
         return lista
-    
+
 }
 
 
 
 
 mapDatos = mapitaDatos =>{
-    //let dataz = this.filterByfinal(mapitaDatos)  
+    //let dataz = this.filterByfinal(mapitaDatos)
     let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
   let data= []
   console.log(dataz);
