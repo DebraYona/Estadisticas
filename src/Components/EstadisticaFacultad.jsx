@@ -106,8 +106,8 @@ class EstadisticaFacultad extends Component{
                             rtl={false}
                             simpleValue
                             options= {option2}
-                            valueKey='id_sede'
-                            labelKey='nombre_sede'
+                            valueKey=
+                            labelKey=
 
                          />
 
