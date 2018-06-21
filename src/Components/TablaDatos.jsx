@@ -7,6 +7,8 @@ import 'react-table/react-table.css'
 import Formulario from "./Formulario"
 import {prueba,columns } from "../Data/data2.json"
 import axios from 'axios';
+import {Col, Row, Label,Button, Form, FormGroup, FormControl, Grid} from 'react-bootstrap';
+import Total from './Total'
 
 class Tablas extends Component{
   constructor(props){
@@ -14,7 +16,8 @@ class Tablas extends Component{
 
     this.state={
       datos:[],
-      selectedOption:props.data
+      selectedOption:props.data,
+      contador:0,
 
     }
     this.mapDatos=this.mapDatos.bind(this);
@@ -146,11 +149,13 @@ filterByfinal=(lista) =>{
 
 
 mapDatos = mapitaDatos =>{
-    let dataz = this.filterByNombre(mapitaDatos)
-    //let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
+   // let dataz = this.filterByNombre(mapitaDatos)
+  let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
   let data= []
+
   console.log(dataz);
   if(dataz) {
+
       data = dataz.map(n=> {
           let datax ={}
           datax['codigo']=n.codigo
@@ -164,19 +169,25 @@ mapDatos = mapitaDatos =>{
           datax['gradotitulo']=n.estudios[0].gradotitulo.nombre
 
 
+
           return datax
       })
+
   }
+
+    console.log(data.length)
     return data
   }
 
   render(){
     console.log(this.state.selectedOption);
       const data2 =this.mapDatos(this.state.datos)
+    //  this.setState({ contador:data2.length})
+      console.log(data2.length)
       const columns2=columns
     return(
         <div>
-
+        <Total contador={data2.length}/>
         <ReactTable  className="tabla" responsive columns={columns2}
          data ={data2}
          />

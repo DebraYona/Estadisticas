@@ -14,7 +14,7 @@ const Header =( props) =>(
                         <img className ="logo" src={require('../images/logo-unac.png')} alt='description of unac' />
                         </Col>
                         <Col xs={12} md={8} ls={8}>
-                        <h1 className ="titulo" >Estadisticas Egresados</h1>
+                        <h1 className ="title" >ESTADISTICAS EGRESADOS</h1>
                         </Col>
                     </Row>
                 </Grid>

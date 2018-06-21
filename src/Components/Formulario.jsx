@@ -114,7 +114,7 @@ class Formulario extends Component{
     pedirExcel=()=>{
         let n =this.state.selectedOption
         axios({
-            url:'http://172.16.2.107:8000/excel/',
+            url:'http://35.185.243.106/excel/',
             method:'POST',
             responseType:'blob',
             data:n
@@ -573,23 +573,23 @@ class Formulario extends Component{
 
                <Row className="show-grid">
                     <Col xs={6} md={4}>
-                    
+
                     </Col>
                     <Col xs={6} md={4}>
-                    
+
                     </Col>
                     <Col xsHidden md={4}>
                     <Button className=""  id="basic-addon1" type="button"  onClick={this.pedirExcel} > Imprimir</Button>
                     </Col>
                 </Row>
 
-                
 
 
-                
+
+
                 </Grid>
 
-              
+
             </Form>
 
            </div>
