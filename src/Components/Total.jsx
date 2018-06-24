@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import { Col, Row, Form, FormGroup, FormControl, Grid , ControlLabel} from 'react-bootstrap';
 

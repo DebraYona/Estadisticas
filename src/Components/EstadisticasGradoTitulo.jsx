@@ -6,7 +6,7 @@ import Rellenar from './Rellenar';
 
 
 
-class EstadisticaFacultad extends Component{
+class EstadisticaGradoTitulo extends Component{
   constructor(props){
     super(props)
 
@@ -41,7 +41,7 @@ class EstadisticaFacultad extends Component{
 
     return(
       <div>
-        
+        <Header/>
         <h1> Estadistica por Facultad</h1>
         {console.log("hola")}
 
@@ -85,4 +85,4 @@ class EstadisticaFacultad extends Component{
 
 }
 
-export default EstadisticaFacultad
+export default EstadisticaGradoTitulo
