@@ -111,6 +111,22 @@ filterBySexo =(lista) =>{
     else
         return lista
 }
+filterByGrado =(lista) =>{
+  console.log(this.state.selectedOption.grado_titulo);
+    if(this.state.selectedOption.grado_titulo){
+      let n=this.state.selectedOption.grado_titulo
+      console.log(n);
+        return lista.reduce((pv,cv)=>{
+          console.log(cv.estudios[0].gradotitulo.id);
+            if(n == (cv.estudios[0].gradotitulo.id)){
+              pv.push(cv)}
+              return pv
+
+
+        }, [])}
+    else
+        return lista
+}
 filterByinicio =(lista) =>{
     if(this.state.selectedOption.inicio.length>0){
       let n=this.state.selectedOption.inicio
@@ -149,8 +165,8 @@ filterByfinal=(lista) =>{
 
 
 mapDatos = mapitaDatos =>{
-   // let dataz = this.filterByNombre(mapitaDatos)
-  let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByinicio(this.filterByfinal(mapitaDatos)))))))
+    //let dataz = this.filterByGrado(mapitaDatos)
+  let dataz = this.filterByFacultad(this.filterByEscuela(this.filterBySede(this.filterByNombre(this.filterBySexo(this.filterByGrado(this.filterByinicio(this.filterByfinal(mapitaDatos))))))))
   let data= []
 
   console.log(dataz);
