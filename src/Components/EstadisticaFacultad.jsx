@@ -41,7 +41,7 @@ class EstadisticaFacultad extends Component{
 
     return(
       <div>
-        
+
         <h1> Estadistica por Facultad</h1>
         {console.log("hola")}
 
@@ -67,9 +67,12 @@ class EstadisticaFacultad extends Component{
           <div className="titulo">
               <span className="tilulo" >nombre facultad</span>
           </div>
-          <div>
+          <div className="col-md-8">
+              <div className="row">
             {console.log("hola")}
             <Rellenar grado={this.state.grados}/>
+            </div>
+            
           </div>
 
 

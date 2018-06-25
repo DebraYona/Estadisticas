@@ -19,7 +19,7 @@ class ProductRow extends React.Component {
 }
 
 class Rellenar extends React.Component {
-  
+
   render() {
     const rows = [];
 
@@ -35,15 +35,28 @@ class Rellenar extends React.Component {
     });
 
     return (
-      <table>
-       <thead>
-         <tr>
-           <th>Grado</th>
-           <th>Total</th>
-         </tr>
-       </thead>
-       <tbody>{rows}</tbody>
-     </table>
+      <div className="col-md-4" >
+           <div className="card mt-4">
+           <div className="card-header">
+           <div className="card-title text-center">
+            <h3>Fime</h3>
+           </div>
+           </div>
+             <div className="card-body">
+                 <table>
+                  <thead>
+                    <tr>
+                      <th>Grado</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </table>
+             </div>
+         </div>
+      </div>
+
+
     );
   }
 }
