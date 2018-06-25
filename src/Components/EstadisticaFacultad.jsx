@@ -95,14 +95,14 @@ class EstadisticaFacultad extends Component{
             return lista
 
     }
-    filterByGrado =(lista) =>{
-      console.log(this.state.selectedOption.grado_titulo);
-        if(this.state.selectedOption.grado_titulo){
-          let n=this.state.selectedOption.grado_titulo
-          console.log(n);
+    filterByGrado =(lista,n) =>{
+
+        if(n){
+          let nu=n
+            console.log(nu);
             return lista.reduce((pv,cv)=>{
               console.log(cv.estudios[0].gradotitulo.id);
-                if(n == (cv.estudios[0].gradotitulo.id)){
+                if(nu == (cv.estudios[0].gradotitulo.id)){
                   pv.push(cv)}
                   return pv
 
@@ -118,18 +118,30 @@ class EstadisticaFacultad extends Component{
       let data =[]
       console.log(dataz);
       if(dataz) {
-      data = dataz.map(n=> {
+        let bachi= this.filterByGrado(dataz,1)
+        let titulo=this.filterByGrado(dataz,2)
+        let segunda=this.filterByGrado(dataz,3)
+        let maestro =this.filterByGrado(dataz,4)
+        let doctor=this.filterByGrado(dataz,5)
+        console.log(bachi);
+        data = dataz.map(n=> {
           let datax ={}
+
             datax['facultad']=n.estudios[0].carrera.facultad.nombre_corto
-            datax['gradotitulo']=n.estudios[0].gradotitulo.nombre
-
-
+            datax['gradotitulo']=n.estudios[0].gradotitulo.id
+            datax['bachiller']=bachi.length
+            datax['titulo']=titulo.length
+            datax['segunda']=segunda.length
+            datax['maestro']=maestro.length
+            datax['doctor']=doctor.length
           return datax
       })
 
       }
 
-      console.log(data.length)
+
+
+
       return data
 
     }
