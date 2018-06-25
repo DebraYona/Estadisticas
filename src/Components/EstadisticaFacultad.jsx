@@ -220,11 +220,10 @@ class EstadisticaFacultad extends Component{
           </div>
           <div className="col-md-8">
               <div className="row">
-            { filtro.map(n=> {
-              <Rellenar grado={n}/>
-              console.log(n);
+            {filtro.map(n=> {
+              return <Rellenar grado={n}/>
             })}
-            {console.log("hOLA")}
+            {console.log()}
 
             </div>
 
