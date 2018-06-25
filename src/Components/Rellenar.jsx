@@ -11,8 +11,8 @@ class ProductRow extends React.Component {
     console.log("row");
     return (
       <tr>
-        <td>{list.name}</td>
-        <td>{list.resultado}</td>
+        <td>bachiller</td>
+        <td>{list.bachiller}</td>
       </tr>
     );
   }
@@ -23,7 +23,9 @@ class Rellenar extends React.Component {
   render() {
     const rows = [];
 
-    {console.log("hola2")}
+
+    console.log("Hola2");
+    {console.log(this.props.grado)}
     this.props.grado.forEach((lista) => {
       rows.push(
         <ProductRow

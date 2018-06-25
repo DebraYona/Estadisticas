@@ -82,7 +82,7 @@ class EstadisticaFacultad extends Component{
 
          if(this.state.selectedOption.fin.length>0){
           let n=this.state.selectedOption.fin
-          console.log(n);
+
             return lista.reduce((pv,cv)=>{
                 if(n >= (cv.estudios[0].fecha_diploma)){
                   console.log(cv.estudios[0].fecha_diploma)
@@ -111,6 +111,22 @@ class EstadisticaFacultad extends Component{
         else
             return lista
     }
+    filtroFacus =(lista)=>{
+
+    return  lista.reduce((pv,cv)=>{
+        let f =cv.facultad
+
+        if(!pv.find(e => e.facultad ==(cv.facultad))){
+          console.log(pv);
+          pv.push(cv)
+        }
+
+
+
+        return pv
+      },[])
+
+    }
 
 
     mapEstadistica =mapitaEstadistica =>{
@@ -138,10 +154,10 @@ class EstadisticaFacultad extends Component{
       })
 
       }
+      let titi = this.filtroFacus(data)
 
-
-
-
+      data =titi
+        console.log(data);
       return data
 
     }
@@ -204,8 +220,12 @@ class EstadisticaFacultad extends Component{
           </div>
           <div className="col-md-8">
               <div className="row">
-            {console.log("hola")}
-            <Rellenar grado={this.state.grados}/>
+            { filtro.map(n=> {
+              <Rellenar grado={n}/>
+              console.log(n);
+            })}
+            {console.log("hOLA")}
+
             </div>
 
           </div>
