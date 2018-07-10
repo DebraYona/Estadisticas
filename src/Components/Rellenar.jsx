@@ -7,12 +7,12 @@ import {Col, Row, Label,Button, Form, FormGroup, ListGroup, FormControl, Grid} f
 
 class ProductRow extends React.Component {
   render() {
-    const list = this.props.listita
+
     console.log("row");
     return (
       <tr>
-        <td>bachiller</td>
-        <td>{list.bachiller}</td>
+        <td>{this.props.clave}</td>
+        <td>{this.props.valor}</td>
       </tr>
     );
   }
@@ -22,26 +22,30 @@ class Rellenar extends React.Component {
 
   render() {
     const rows = [];
-
+    let keys = [];
+    let value = [];
+    keys =Object.keys(this.props.grado)
+    value =Object.values(this.props.grado)
 
     console.log("Hola2");
-    {console.log(this.props.grado)}
-    this.props.grado.forEach((lista) => {
+    console.log(keys);
+    console.log(value);
+
+    value.map((n,i)=> {
       rows.push(
         <ProductRow
-          listita={lista}
-          key={lista.name}
+          valor={n}
+          clave={keys[i]}
         />
       );
-
-    });
+    })
 
     return (
       <div className="col-md-4" >
            <div className="card mt-4">
            <div className="card-header">
            <div className="card-title text-center">
-            <h3>Fime</h3>
+            <h3>{value[0]}</h3>
            </div>
            </div>
              <div className="card-body">
